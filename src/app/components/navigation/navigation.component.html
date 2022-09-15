@@ -10,15 +10,17 @@
     <a routerLink="/fourwins">Four Wins</a>
     <a routerLink="/dungeoncralwer">Dungeon Crawler</a>
   </div>
-  <div>
-    <button class="burgerMenu" (click)="toggle()" *ngIf="isHidden">
+  <div class="burger-container">
+    <button class="burger-menu" (click)="toggle()" *ngIf="isHidden">
       <img src="assets/burgerMenu.svg"/>
     </button>
-    <div class="burgerDropDown" *ngIf="!isHidden">
-      
-      <a routerLink="">Home</a>
-      <a routerLink="/fourwins">Four Wins</a>
-      <a routerLink="/dungeoncralwer">Dungeon Crawler</a>
+    <div class="burger-dropdown" *ngIf="!isHidden">
+      <div class="burger-dropdown-content">
+        <i class="material-icons" (click)="toggle()">close</i>
+        <a routerLink="">Home</a>
+        <a routerLink="/fourwins">Four Wins</a>
+        <a routerLink="/dungeoncralwer">Dungeon Crawler</a>
+      </div>
     </div>
   </div>
 </nav>

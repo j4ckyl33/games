@@ -32,28 +32,50 @@ div{
   font-size: 2rem;
 }
 
-.burgerMenu{
+.burger-menu{
   background-color: inherit;
   border: none;
   display: none;
 }
 
+.burger-container{
+  display: none;
+}
+
+/*Mobile Version*/
 @media all and (max-width: 768px) {
   .menu{
     display: none;
   }
-  .burgerMenu{
+  .burger-menu{
     display: block;
   }
 
-  .burgerDropDown{
-    display: flex;
-    flex-direction: column;
-    float: right;
+  .burger-container{
+    display: block;
+  }
+
+  .burger-dropdown{
     height: 100vh;
-    background-color: black;
+    background-color: white;
     position: absolute;
     right: 0;
     top: 0;
+    margin-right: 2%;
+  }
+
+  .burger-dropdown-content{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .burger-dropdown-content a{
+    padding-top: 1rem;
+  }
+
+  .material-icons{
+    font-size: 3rem;
+    padding-left: 12rem;
   }
 }
