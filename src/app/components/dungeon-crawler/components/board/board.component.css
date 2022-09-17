@@ -1,0 +1,22 @@
+.grid-container{
+  display: grid;
+  max-width: 70px;
+  max-height: 70px;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.unexplored-field-image{
+  max-width: 70px;
+  max-height: 70px;
+}
+
+.explored-field-image{
+  max-width: 70px;
+  max-height: 70px;
+}
+
+.border{
+  border: solid #5B6DCD 10px;
+  width: 560px;
+  padding: 10px;
+}

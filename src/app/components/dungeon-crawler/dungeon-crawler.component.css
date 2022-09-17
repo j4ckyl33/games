@@ -1,25 +1,17 @@
-.grid-container{
-  display: grid;
-  max-width: 70px;
-  min-height: 70px;
-  grid-template-columns: repeat(8, auto);
-  grid-template-rows: repeat(8, auto);
-}
 
-.unexplored-field-image{
-  max-width: 70px;
-  min-height: 70px;
-}
+/*
+  Dungeon Crawler Screen
+*/
 
-.explored-field-image{
-  max-width: 70px;
-  min-height: 70px;
-}
-
-.crawler-container{
-  border: solid #5B6DCD 10px;
-  width: 560px;
+.dungeon-crawler-container{
+  display: flex;
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
 }
+
+/*
+  Player Interaction Screen
+*/
+
+

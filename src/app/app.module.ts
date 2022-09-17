@@ -7,6 +7,10 @@ import { FourWinsComponent } from './components/four-wins/four-wins.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HomescreenComponent } from './components/homescreen/homescreen.component';
 import { DungeonCrawlerComponent } from './components/dungeon-crawler/dungeon-crawler.component';
+import { BoardComponent } from './components/dungeon-crawler/components/board/board.component';
+import { PlayerInteractionComponent } from './components/dungeon-crawler/components/player-interaction/player-interaction.component';
+import { ShopComponent } from './components/dungeon-crawler/components/shop/shop.component';
+import { InventoryComponent } from './components/dungeon-crawler/components/inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +18,11 @@ import { DungeonCrawlerComponent } from './components/dungeon-crawler/dungeon-cr
     FourWinsComponent,
     NavigationComponent,
     HomescreenComponent,
-    DungeonCrawlerComponent
+    DungeonCrawlerComponent,
+    BoardComponent,
+    PlayerInteractionComponent,
+    ShopComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,31 @@
+.player-menu-container{
+  padding: 10px;
+  width: 400px;
+  height: 560px;
+  border: solid #5B6DCD 10px;
+}
+
+.event-details{
+  min-height: 200px;
+}
+
+.character-details{
+  min-height: 170px;
+}
+
+.player-interactions{
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.player-interactions button{
+  width: 400px;
+  height: 40px;
+  margin: 5px auto;
+}
+
+.explored-field-image{
+  max-width: 70px;
+  max-height: 70px;
+}
