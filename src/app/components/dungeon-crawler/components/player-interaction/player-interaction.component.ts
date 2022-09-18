@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Character, CharacterClass} from "../../../../types/types.service";
 
 @Component({
   selector: 'player-interaction',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerInteractionComponent implements OnInit {
 
+  @Input() player: Character
+  @Output() classSelection = new EventEmitter<CharacterClass>()
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  emitSelectedClass(classSelected: CharacterClass): void {
+    this.classSelection.emit(classSelected)
+  }
 }

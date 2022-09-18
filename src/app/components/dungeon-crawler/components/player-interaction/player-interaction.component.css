@@ -13,17 +13,11 @@
   min-height: 170px;
 }
 
-.player-interactions{
+.player-interactions-container{
   min-height: 100px;
-  display: flex;
-  flex-direction: column;
 }
 
-.player-interactions button{
-  width: 400px;
-  height: 40px;
-  margin: 5px auto;
-}
+
 
 .explored-field-image{
   max-width: 70px;

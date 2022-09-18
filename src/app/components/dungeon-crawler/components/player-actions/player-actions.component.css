@@ -1,0 +1,32 @@
+.player-interactions{
+  display: flex;
+  flex-direction: column;
+}
+
+.player-battle-interactions input{
+  width: 400px;
+  height: 40px;
+  margin: 5px auto;
+}
+
+.player-movement-interactions input{
+  width: 150px;
+  height: 40px;
+}
+
+.up-movement{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.side-movement{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.down-movement{
+  display: flex;
+  justify-content: center;
+}

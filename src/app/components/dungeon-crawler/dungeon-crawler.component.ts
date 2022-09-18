@@ -15,9 +15,29 @@ export class DungeonCrawlerComponent implements OnInit {
   constructor(private sharedServices: SharedService) {
     this.player = {
       name: 'testPlayer',
-      class: 'Barbarian',
+      class: 'NoClass',
       level: 1,
-      health: this.sharedServices.getRandomNumber(10, 20),
+      health: 0,
+      defense: 0,
+      attack: 0,
+      agility: 0,
+      critical: 0,
+      mana: 0,
+      wisdom: 0,
+      currentField: 0,
+      nextField: null,
+    }
+  }
+
+  ngOnInit(): void {
+  }
+
+  createPlayer(characterClass: CharacterClass): void {
+    this.player = {
+      name: 'testPlayer',
+      class: characterClass,
+      level: 1,
+      health: this.sharedServices.getRandomNumber(10, 15),
       defense: this.sharedServices.getRandomNumber(0, 5),
       attack: this.sharedServices.getRandomNumber(10, 20),
       agility: this.sharedServices.getRandomNumber(0, 5),
@@ -27,11 +47,74 @@ export class DungeonCrawlerComponent implements OnInit {
       currentField: 0,
       nextField: null,
     }
-  }
 
-  ngOnInit(): void {
+    switch (characterClass){
+      case "Assassin":
+        this.player = {
+          name: 'testPlayer',
+          class: characterClass,
+          level: 1,
+          health: this.sharedServices.getRandomNumber(10, 15),
+          defense: this.sharedServices.getRandomNumber(0, 5),
+          attack: this.sharedServices.getRandomNumber(10, 20),
+          agility: this.sharedServices.getRandomNumber(0, 5),
+          critical: this.sharedServices.getRandomNumber(0, 5),
+          mana: this.sharedServices.getRandomNumber(0, 5),
+          wisdom: this.sharedServices.getRandomNumber(0, 5),
+          currentField: 0,
+          nextField: null,
+        }
+        break
+      case "Barbarian":
+        this.player = {
+          name: 'testPlayer',
+          class: characterClass,
+          level: 1,
+          health: this.sharedServices.getRandomNumber(10, 15),
+          defense: this.sharedServices.getRandomNumber(0, 5),
+          attack: this.sharedServices.getRandomNumber(10, 20),
+          agility: this.sharedServices.getRandomNumber(0, 5),
+          critical: this.sharedServices.getRandomNumber(0, 5),
+          mana: this.sharedServices.getRandomNumber(0, 5),
+          wisdom: this.sharedServices.getRandomNumber(0, 5),
+          currentField: 0,
+          nextField: null,
+        }
+        break
+      case "Mage":
+        this.player = {
+          name: 'testPlayer',
+          class: characterClass,
+          level: 1,
+          health: this.sharedServices.getRandomNumber(10, 15),
+          defense: this.sharedServices.getRandomNumber(0, 5),
+          attack: this.sharedServices.getRandomNumber(10, 20),
+          agility: this.sharedServices.getRandomNumber(0, 5),
+          critical: this.sharedServices.getRandomNumber(0, 5),
+          mana: this.sharedServices.getRandomNumber(0, 5),
+          wisdom: this.sharedServices.getRandomNumber(0, 5),
+          currentField: 0,
+          nextField: null,
+        }
+        break
+      case "Warrior":
+        this.player = {
+          name: 'testPlayer',
+          class: characterClass,
+          level: 1,
+          health: this.sharedServices.getRandomNumber(10, 15),
+          defense: this.sharedServices.getRandomNumber(0, 5),
+          attack: this.sharedServices.getRandomNumber(10, 20),
+          agility: this.sharedServices.getRandomNumber(0, 5),
+          critical: this.sharedServices.getRandomNumber(0, 5),
+          mana: this.sharedServices.getRandomNumber(0, 5),
+          wisdom: this.sharedServices.getRandomNumber(0, 5),
+          currentField: 0,
+          nextField: null,
+        }
+        break
+    }
   }
-
   /*generateItem(character: Character): void {
     }
     generateEquipment():void{}

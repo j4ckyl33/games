@@ -79,7 +79,7 @@ type Danger = {
   trap?: number
 }
 
-export type CharacterClass = 'Assassin' | 'Barbarian' | 'Mage' | 'Warrior'
+export type CharacterClass = 'Assassin' | 'Barbarian' | 'Mage' | 'Warrior' |'NoClass'
 
 type Rarity = 'Common' | 'Rare' | 'Epic' | 'Legendary'
 

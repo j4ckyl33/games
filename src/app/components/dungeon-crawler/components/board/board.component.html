@@ -1,7 +1,7 @@
 <div class="border">
   <div class="grid-container" *ngFor="let field of fieldArray">
     <div *ngFor="let oneField of field">
-      <img src="assets/barbarian.png" class="explored-field-image" *ngIf="player.currentField === oneField.index"/>
+      <img src="assets/{{player.class}}.png" class="explored-field-image" *ngIf="player.currentField === oneField.index"/>
       <img src="assets/dice_icon.png" class="unexplored-field-image" *ngIf="player.currentField !== oneField.index"/>
     </div>
   </div>

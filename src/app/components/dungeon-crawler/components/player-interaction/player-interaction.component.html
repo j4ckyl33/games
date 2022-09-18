@@ -1,14 +1,16 @@
 <div class="player-menu-container">
-  <div class="event-details">
-    Template Enemy Text and Event Text
+  <div *ngIf="player.class !== 'NoClass'">
+    <div class="event-details">
+      Template Enemy Text and Event Text
+    </div>
+    <div class="character-details">
+      <img src="assets/{{player.class}}.png" class="explored-field-image"/>
+    </div>
+    <div class="player-interactions-container">
+      <player-actions-interaction></player-actions-interaction>
+    </div>
   </div>
-  <div class="character-details">
-    <img src="assets/barbarian.png" class="explored-field-image"/>
-  </div>
-  <div class="player-interactions">
-    <button>Attack</button>
-    <button>Magic</button>
-    <button>Items</button>
-    <button>Flee</button>
+  <div *ngIf="player.class === 'NoClass'">
+    <player-creation (classSelection)="emitSelectedClass($event)"></player-creation>
   </div>
 </div>

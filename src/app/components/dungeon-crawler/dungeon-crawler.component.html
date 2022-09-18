@@ -1,4 +1,4 @@
 <div class="dungeon-crawler-container">
-  <board [player]="player"></board>
-  <player-interaction></player-interaction>
+  <board *ngIf="player.class !== 'NoClass'" [player]="player"></board>
+  <player-interaction [player]="player" (classSelection)="createPlayer($event)"></player-interaction>
 </div>

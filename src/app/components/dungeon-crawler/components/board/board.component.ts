@@ -197,7 +197,6 @@ export class BoardComponent implements OnInit {
     character.critical = Math.floor(character.critical)
     character.mana = Math.floor(character.mana)
     character.wisdom = Math.floor(character.wisdom)
-    console.log(character)
 
     return character
   }
