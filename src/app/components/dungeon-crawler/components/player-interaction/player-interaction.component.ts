@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Character, CharacterClass} from "../../../../types/types.service";
+import {Character, CharacterClass, Field} from "../../../../types/types.service";
 
 @Component({
   selector: 'player-interaction',
@@ -9,6 +9,8 @@ import {Character, CharacterClass} from "../../../../types/types.service";
 export class PlayerInteractionComponent implements OnInit {
 
   @Input() player: Character
+  @Input() currentField: number
+  @Input() fieldArray: Field[]
   @Output() classSelection = new EventEmitter<CharacterClass>()
   constructor() { }
 
@@ -18,4 +20,9 @@ export class PlayerInteractionComponent implements OnInit {
   emitSelectedClass(classSelected: CharacterClass): void {
     this.classSelection.emit(classSelected)
   }
+
+  test(){
+    console.log(this.fieldArray)
+  }
+
 }

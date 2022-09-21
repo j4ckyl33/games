@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Character, CharacterClass, Field} from "../../../../types/types.service";
 import {SharedService} from "../../../../shared-services/shared-services.service";
 
@@ -31,6 +31,7 @@ const enemyNames: string[] = ['Reckless Branch', 'Bright Hornet', 'Focused Bloss
 export class BoardComponent implements OnInit {
 
   @Input() player: Character
+  @Output() fieldArrayEmitter = new EventEmitter<Field[]>()
 
   fieldArray = []
 
@@ -39,8 +40,8 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateFields()
+    this.fieldArrayEmitter.emit(this.fieldArray)
   }
-
 
   generateDanger(currField: Field, character: Character, bossExist: boolean): boolean {
     let randNumber = this.sharedServices.getRandomNumber(0, 75)
@@ -105,7 +106,6 @@ export class BoardComponent implements OnInit {
         counter++
       }
       this.fieldArray.push(tempArray)
-      console.log(this.fieldArray)
     }
   }
 

@@ -7,10 +7,11 @@
       <img src="assets/{{player.class}}.png" class="explored-field-image"/>
     </div>
     <div class="player-interactions-container">
-      <player-actions-interaction></player-actions-interaction>
+      <player-actions [currentField]="currentField"></player-actions>
     </div>
   </div>
   <div *ngIf="player.class === 'NoClass'">
     <player-creation (classSelection)="emitSelectedClass($event)"></player-creation>
   </div>
+  <button (click)="test()"></button>
 </div>

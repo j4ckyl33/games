@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Character, CharacterClass, Field} from "../../types/types.service";
 import {SharedService} from "../../shared-services/shared-services.service";
 
@@ -7,10 +7,10 @@ import {SharedService} from "../../shared-services/shared-services.service";
   templateUrl: './dungeon-crawler.component.html',
   styleUrls: ['./dungeon-crawler.component.css']
 })
-export class DungeonCrawlerComponent implements OnInit {
+export class DungeonCrawlerComponent implements OnInit, OnChanges {
 
   player: Character
-  fieldArray = []
+  fieldArray: Field[]
 
   constructor(private sharedServices: SharedService) {
     this.player = {
@@ -25,11 +25,21 @@ export class DungeonCrawlerComponent implements OnInit {
       mana: 0,
       wisdom: 0,
       currentField: 0,
-      nextField: null,
     }
   }
 
+  ngOnChanges(changes:SimpleChanges): void{
+    console.log(changes)
+  }
+
   ngOnInit(): void {
+    this.sharedServices.playerMovement$.subscribe(movement => {
+      this.player.currentField = movement
+    })
+  }
+
+  setArrayField(event): void{
+    this.fieldArray = event
   }
 
   createPlayer(characterClass: CharacterClass): void {
@@ -45,7 +55,6 @@ export class DungeonCrawlerComponent implements OnInit {
       mana: this.sharedServices.getRandomNumber(0, 5),
       wisdom: this.sharedServices.getRandomNumber(0, 5),
       currentField: 0,
-      nextField: null,
     }
 
     switch (characterClass){
@@ -62,7 +71,6 @@ export class DungeonCrawlerComponent implements OnInit {
           mana: this.sharedServices.getRandomNumber(0, 5),
           wisdom: this.sharedServices.getRandomNumber(0, 5),
           currentField: 0,
-          nextField: null,
         }
         break
       case "Barbarian":
@@ -78,7 +86,6 @@ export class DungeonCrawlerComponent implements OnInit {
           mana: this.sharedServices.getRandomNumber(0, 5),
           wisdom: this.sharedServices.getRandomNumber(0, 5),
           currentField: 0,
-          nextField: null,
         }
         break
       case "Mage":
@@ -94,7 +101,6 @@ export class DungeonCrawlerComponent implements OnInit {
           mana: this.sharedServices.getRandomNumber(0, 5),
           wisdom: this.sharedServices.getRandomNumber(0, 5),
           currentField: 0,
-          nextField: null,
         }
         break
       case "Warrior":
@@ -110,7 +116,6 @@ export class DungeonCrawlerComponent implements OnInit {
           mana: this.sharedServices.getRandomNumber(0, 5),
           wisdom: this.sharedServices.getRandomNumber(0, 5),
           currentField: 0,
-          nextField: null,
         }
         break
     }

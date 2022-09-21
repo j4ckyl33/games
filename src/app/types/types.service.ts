@@ -20,7 +20,6 @@ export type Character = {
   wisdom: number,
   spells?: [Spell?, Spell?, Spell?],
   currentField?: number,
-  nextField?: number,
 }
 /*
 type Equipment = {
