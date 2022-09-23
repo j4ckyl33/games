@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {Field} from "../types/types.service";
 
 @Injectable({
@@ -26,5 +26,16 @@ export class SharedService {
 
   getRandomNumber(min: number, max: number): number{
     return Math.floor(Math.random() * max) + min
+  }
+
+  findCurrentField(board: any[], currentPlayerField: number): Field {
+    for(let i = 0; i < board.length; i++){
+      for(let j = 0; j < board[i].length; j++){
+        if(board[i][j].index === currentPlayerField){
+          return board[i][j]
+        }
+      }
+    }
+    return null
   }
 }

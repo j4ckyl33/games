@@ -40,7 +40,18 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
     this.generateFields()
     this.sharedServices.initializedFieldArray(this.fieldArray)
+
+    this.sharedServices.playerMovement$.subscribe(index => {
+      for(let i = 0; i < this.fieldArray.length; i++){
+        for(let j = 0; j < this.fieldArray[i].length; j++){
+          if(this.fieldArray[i][j].index === index){
+            this.fieldArray[i][j].visited = true
+          }
+        }
+      }
+    })
   }
+
 
   generateDanger(currField: Field, character: Character, bossExist: boolean): boolean {
     let randNumber = this.sharedServices.getRandomNumber(0, 75)
@@ -91,13 +102,13 @@ export class BoardComponent implements OnInit {
         let field: Field = <Field>{}
         let randNumber = this.sharedServices.getRandomNumber(0, 100)
         // Generates possible Danger
-        if(/*randNumber >= 0 && randNumber < 25*/true){
-          bossExist = this.generateDanger(field, this.player, bossExist)
-        }else if(randNumber >= 25 && randNumber < 50){ // Generate Hidden Rewards
-          field.danger = null
-        }else{ // Generate Nothing
+        if( (j === 0 && i === 0) || (randNumber >= 0 && randNumber < 50)){ // Generate Nothing
           field.danger = null
           field.reward = null
+        }else if(/*randNumber >= 50 && randNumber < 75*/true){
+          bossExist = this.generateDanger(field, this.player, bossExist)
+        }else { // Generate Hidden Rewards
+          field.danger = null
         }
         field.index = counter
         field.visited = false

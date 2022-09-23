@@ -1,11 +1,11 @@
 <div class="player-interactions">
-  <div class="player-battle-interactions" *ngIf="currentField.danger?.enemy">
-    <input type="button" value="Attack" >
+  <div class="player-battle-interactions" *ngIf="currentField?.danger?.enemy && currentField?.danger?.enemy?.health !== 0">
+    <input type="button" value="Attack" (click)="battleOptions('attack')">
     <input type="button" value="Magic">
     <input type="button" value="Item">
     <input type="button" value="Flee">
   </div>
-  <div class="player-movement-interactions" *ngIf="currentField.danger?.enemy?.health === 0 || !currentField.danger">
+  <div class="player-movement-interactions" *ngIf="currentField?.danger?.enemy?.health === 0 || !currentField?.danger">
     <div class="up-movement">
       <input type="button" value="Up" (click)="playerMovement('up')">
     </div>

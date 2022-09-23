@@ -2,7 +2,8 @@ export type Field = {
   index: number,
   danger?: Danger,
   reward?: Character,
-  visited: boolean
+  visited: boolean,
+  end?: boolean
 }
 
 export type Character = {

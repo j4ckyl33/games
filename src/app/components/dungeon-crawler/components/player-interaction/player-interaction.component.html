@@ -1,19 +1,21 @@
 <div class="player-menu-container">
   <div *ngIf="player.class !== 'NoClass'">
-    <div class="event-details" *ngIf="currentField.danger?.enemy"> <!---->
+    <div class="event-details">
       <!--Enemy-->
-      <div class="enemy-details">
-      There is an Enemy
+      <div class="enemy-details" *ngIf="currentField?.danger?.enemy && currentField?.danger?.enemy?.health !== 0">
+      {{ currentField?.danger?.enemy?.name}}
       <img src="assets/Rogue.png" class="enemy-image"/>
       <div>
       </div>
+        <br>
+        Health: {{ currentField?.danger?.enemy?.health }}
       </div>
     </div>
     <div class="character-details">
       <img src="assets/{{player.class}}.png" class="explored-field-image"/>
     </div>
     <div class="player-interactions-container">
-      <player-actions [currentPlayerField]="currentPlayerField"></player-actions>
+      <player-actions [currentPlayerField]="currentPlayerField" [player]="player"></player-actions>
     </div>
   </div>
   <div *ngIf="player.class === 'NoClass'">
