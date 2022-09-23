@@ -1,17 +1,22 @@
 <div class="player-menu-container">
   <div *ngIf="player.class !== 'NoClass'">
-    <div class="event-details">
-      Template Enemy Text and Event Text
+    <div class="event-details" *ngIf="currentField.danger?.enemy"> <!---->
+      <!--Enemy-->
+      <div class="enemy-details">
+      There is an Enemy
+      <img src="assets/Rogue.png" class="enemy-image"/>
+      <div>
+      </div>
+      </div>
     </div>
     <div class="character-details">
       <img src="assets/{{player.class}}.png" class="explored-field-image"/>
     </div>
     <div class="player-interactions-container">
-      <player-actions [currentField]="currentField"></player-actions>
+      <player-actions [currentPlayerField]="currentPlayerField"></player-actions>
     </div>
   </div>
   <div *ngIf="player.class === 'NoClass'">
     <player-creation (classSelection)="emitSelectedClass($event)"></player-creation>
   </div>
-  <button (click)="test()"></button>
 </div>

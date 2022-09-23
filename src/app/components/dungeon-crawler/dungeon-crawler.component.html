@@ -1,9 +1,8 @@
 <div class="dungeon-crawler-container">
-  <board *ngIf="player.class !== 'NoClass'" (fieldArrayEmitter)="setArrayField($event)" [player]="player"></board>
+  <board *ngIf="player.class !== 'NoClass'" [player]="player"></board>
   <player-interaction
     [player]="player"
-    [currentField]="player.currentField"
+    [currentPlayerField]="player.currentField"
     (classSelection)="createPlayer($event)"
-    [fieldArray]="fieldArray"
   ></player-interaction>
 </div>

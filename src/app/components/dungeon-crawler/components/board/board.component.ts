@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Character, CharacterClass, Field} from "../../../../types/types.service";
 import {SharedService} from "../../../../shared-services/shared-services.service";
 
@@ -31,7 +31,6 @@ const enemyNames: string[] = ['Reckless Branch', 'Bright Hornet', 'Focused Bloss
 export class BoardComponent implements OnInit {
 
   @Input() player: Character
-  @Output() fieldArrayEmitter = new EventEmitter<Field[]>()
 
   fieldArray = []
 
@@ -40,7 +39,7 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateFields()
-    this.fieldArrayEmitter.emit(this.fieldArray)
+    this.sharedServices.initializedFieldArray(this.fieldArray)
   }
 
   generateDanger(currField: Field, character: Character, bossExist: boolean): boolean {
@@ -49,13 +48,13 @@ export class BoardComponent implements OnInit {
     if(randNumber === 1 && !bossExist) {
       this.generateEnemy(currField, character, bossExist)
       return true
-    }else if(randNumber >= 0 && randNumber < 25){
+    }/*else if(randNumber >= 0 && randNumber < 25){
       currField.danger = {
         trap: damage,
         enemy: null,
       }
       return false
-    }else{
+    }*/else{
       this.generateEnemy(currField, character, bossExist)
       return false
     }
@@ -92,7 +91,7 @@ export class BoardComponent implements OnInit {
         let field: Field = <Field>{}
         let randNumber = this.sharedServices.getRandomNumber(0, 100)
         // Generates possible Danger
-        if(randNumber >= 0 && randNumber < 25){
+        if(/*randNumber >= 0 && randNumber < 25*/true){
           bossExist = this.generateDanger(field, this.player, bossExist)
         }else if(randNumber >= 25 && randNumber < 50){ // Generate Hidden Rewards
           field.danger = null

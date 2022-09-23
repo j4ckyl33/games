@@ -7,6 +7,13 @@
 
 .event-details{
   min-height: 200px;
+  border: solid #5B6DCD 1px;
+}
+
+.enemy-details{
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
 }
 
 .character-details{
@@ -17,9 +24,15 @@
   min-height: 100px;
 }
 
-
-
 .explored-field-image{
   max-width: 70px;
   max-height: 70px;
 }
+
+.enemy-image{
+  max-width: 70px;
+  max-height: 70px;
+  margin-top: 20px;
+}
+
+

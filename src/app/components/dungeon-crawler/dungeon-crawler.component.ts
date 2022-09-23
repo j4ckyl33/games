@@ -7,10 +7,9 @@ import {SharedService} from "../../shared-services/shared-services.service";
   templateUrl: './dungeon-crawler.component.html',
   styleUrls: ['./dungeon-crawler.component.css']
 })
-export class DungeonCrawlerComponent implements OnInit, OnChanges {
+export class DungeonCrawlerComponent implements OnInit {
 
   player: Character
-  fieldArray: Field[]
 
   constructor(private sharedServices: SharedService) {
     this.player = {
@@ -28,18 +27,11 @@ export class DungeonCrawlerComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes:SimpleChanges): void{
-    console.log(changes)
-  }
 
   ngOnInit(): void {
     this.sharedServices.playerMovement$.subscribe(movement => {
       this.player.currentField = movement
     })
-  }
-
-  setArrayField(event): void{
-    this.fieldArray = event
   }
 
   createPlayer(characterClass: CharacterClass): void {
