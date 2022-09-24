@@ -1,24 +1,26 @@
 <div class="player-menu-container">
-  <div *ngIf="player.class !== 'NoClass'">
+  <div *ngIf="dataGenerationServices.player.class !== 'NoClass'">
     <div class="event-details">
       <!--Enemy-->
-      <div class="enemy-details" *ngIf="currentField?.danger?.enemy && currentField?.danger?.enemy?.health !== 0">
+      <div class="enemy-details" *ngIf="currentField?.danger?.enemy && currentField?.danger?.enemy?.health > 0">
       {{ currentField?.danger?.enemy?.name}}
       <img src="assets/Rogue.png" class="enemy-image"/>
       <div>
       </div>
         <br>
         Health: {{ currentField?.danger?.enemy?.health }}
+        <br>
+        Class: {{ currentField?.danger?.enemy?.class }}
       </div>
     </div>
     <div class="character-details">
-      <img src="assets/{{player.class}}.png" class="explored-field-image"/>
+      <img src="assets/{{dataGenerationServices.player.class}}.png" class="explored-field-image"/>
     </div>
     <div class="player-interactions-container">
-      <player-actions [currentPlayerField]="currentPlayerField" [player]="player"></player-actions>
+      <player-actions [(currentField)]="currentField"></player-actions>
     </div>
   </div>
-  <div *ngIf="player.class === 'NoClass'">
-    <player-creation (classSelection)="emitSelectedClass($event)"></player-creation>
+  <div *ngIf="dataGenerationServices.player.class === 'NoClass'">
+    <player-creation></player-creation>
   </div>
 </div>

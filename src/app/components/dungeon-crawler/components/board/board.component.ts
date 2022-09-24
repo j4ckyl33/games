@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {Character, CharacterClass, Field} from "../../../../types/types.service";
-import {SharedService} from "../../../../shared-services/shared-services.service";
+import {SharedServices} from "../../shared-services/shared-services.service";
+import {DataGenerationServices} from "../../services/data-generation-service.service";
 
 const enemyNames: string[] = ['Reckless Branch', 'Bright Hornet', 'Focused Blossom', 'Honored Sunlight',
   'Leaping Edge', 'Majestic Magpie', 'Pouncing Thorn', 'Nimble Meteor', 'Living Bug', 'Flying Blow',
@@ -28,34 +29,20 @@ const enemyNames: string[] = ['Reckless Branch', 'Bright Hornet', 'Focused Bloss
 })
 
 
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit{
 
-  @Input() player: Character
+  constructor(
+    private sharedServices: SharedServices,
+    public dataGenerationServices: DataGenerationServices
+  ) {}
 
-  fieldArray = []
-
-  constructor(private sharedServices: SharedService) {
-  }
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.generateFields()
-    this.sharedServices.initializedFieldArray(this.fieldArray)
-
-    this.sharedServices.playerMovement$.subscribe(index => {
-      for(let i = 0; i < this.fieldArray.length; i++){
-        for(let j = 0; j < this.fieldArray[i].length; j++){
-          if(this.fieldArray[i][j].index === index){
-            this.fieldArray[i][j].visited = true
-          }
-        }
-      }
-    })
   }
-
 
   generateDanger(currField: Field, character: Character, bossExist: boolean): boolean {
     let randNumber = this.sharedServices.getRandomNumber(0, 75)
-    let damage = this.sharedServices.getRandomNumber(0, this.player.health / 3)
+    let damage = this.sharedServices.getRandomNumber(0, this.dataGenerationServices.player.health / 3)
     if(randNumber === 1 && !bossExist) {
       this.generateEnemy(currField, character, bossExist)
       return true
@@ -106,7 +93,7 @@ export class BoardComponent implements OnInit {
           field.danger = null
           field.reward = null
         }else if(/*randNumber >= 50 && randNumber < 75*/true){
-          bossExist = this.generateDanger(field, this.player, bossExist)
+          bossExist = this.generateDanger(field, this.dataGenerationServices.player, bossExist)
         }else { // Generate Hidden Rewards
           field.danger = null
         }
@@ -115,7 +102,7 @@ export class BoardComponent implements OnInit {
         tempArray.push(field)
         counter++
       }
-      this.fieldArray.push(tempArray)
+      this.dataGenerationServices.board.push(tempArray)
     }
   }
 
@@ -134,70 +121,105 @@ export class BoardComponent implements OnInit {
     switch (character.class){
       case 'Barbarian':
         //Buff
-        //character.health = this.sharedServices.getRandomNumber(this.player.health / 3, this.player.health / 2) + this.player.level
-        character.attack = this.sharedServices.getRandomNumber(this.player.attack / 3, this.player.attack / 2) + this.player.level
-        character.agility = this.sharedServices.getRandomNumber(this.player.agility / 3, this.player.agility / 2) + this.player.level
+        character.health = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.health / 3,
+          this.dataGenerationServices.player.health / 2) + this.dataGenerationServices.player.level
+        character.attack = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.attack / 3,
+          this.dataGenerationServices.player.attack / 2) + this.dataGenerationServices.player.level
+        character.agility = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.agility / 3,
+          this.dataGenerationServices.player.agility / 2) + this.dataGenerationServices.player.level
 
         //Nerf
-        character.defense = this.sharedServices.getRandomNumber(this.player.defense / 4, this.player.defense / 3) - this.player.level
-        character.wisdom = this.sharedServices.getRandomNumber(this.player.wisdom / 4, this.player.wisdom / 3) - this.player.level
+        character.defense = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.defense / 4,
+          this.dataGenerationServices.player.defense / 3) - this.dataGenerationServices.player.level
+        character.wisdom = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.wisdom / 4,
+          this.dataGenerationServices.player.wisdom / 3) - this.dataGenerationServices.player.level
 
         //Normal
-        character.critical = this.sharedServices.getRandomNumber(this.player.critical / 3, this.player.critical / 2)
-        character.mana = this.sharedServices.getRandomNumber(this.player.mana / 3, this.player.mana / 2)
+        character.critical = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.critical / 3,
+          this.dataGenerationServices.player.critical / 2)
+        character.mana = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.mana / 3,
+          this.dataGenerationServices.player.mana / 2)
         break;
       case 'Assassin':
         //Buff
-        character.agility = this.sharedServices.getRandomNumber(this.player.agility / 3, this.player.agility / 2) + this.player.level
-        character.critical = this.sharedServices.getRandomNumber(this.player.critical / 3, this.player.critical / 2) + this.player.level
-        character.attack = this.sharedServices.getRandomNumber(this.player.attack / 3, this.player.attack / 2) + this.player.level
+        character.agility = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.agility / 3,
+          this.dataGenerationServices.player.agility / 2) + this.dataGenerationServices.player.level
+        character.critical = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.critical / 3,
+          this.dataGenerationServices.player.critical / 2) + this.dataGenerationServices.player.level
+        character.attack = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.attack / 3,
+          this.dataGenerationServices.player.attack / 2) + this.dataGenerationServices.player.level
 
         //Nerf
-        character.health = this.sharedServices.getRandomNumber(this.player.health / 4, this.player.health / 3) - this.player.level
-        character.defense = this.sharedServices.getRandomNumber(this.player.defense / 4, this.player.defense / 3) - this.player.level
+        character.health = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.health / 4,
+          this.dataGenerationServices.player.health / 3) - this.dataGenerationServices.player.level
+        character.defense = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.defense / 4,
+          this.dataGenerationServices.player.defense / 3) - this.dataGenerationServices.player.level
 
         //Normal
-        character.wisdom = this.sharedServices.getRandomNumber(this.player.wisdom / 3, this.player.wisdom / 2)
-        character.mana = this.sharedServices.getRandomNumber(this.player.mana / 3, this.player.mana / 2)
+        character.wisdom = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.wisdom / 3,
+          this.dataGenerationServices.player.wisdom / 2)
+        character.mana = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.mana / 3,
+          this.dataGenerationServices.player.mana / 2)
         break;
       case 'Mage':
         //Buff
-        character.mana = this.sharedServices.getRandomNumber(this.player.mana / 3, this.player.mana / 2) + this.player.level
-        character.wisdom = this.sharedServices.getRandomNumber(this.player.wisdom / 3, character.wisdom / 2) + this.player.level
+        character.mana = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.mana / 3,
+          this.dataGenerationServices.player.mana / 2) + this.dataGenerationServices.player.level
+        character.wisdom = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.wisdom / 3,
+          this.dataGenerationServices.player.wisdom / 2) + this.dataGenerationServices.player.level
 
         //Nerf
-        character.attack = this.sharedServices.getRandomNumber(this.player.attack / 4, this.player.attack / 3) - this.player.level
-        character.defense = this.sharedServices.getRandomNumber(this.player.defense / 4, this.player.defense / 3) - this.player.level
-        character.health = this.sharedServices.getRandomNumber(this.player.health / 4, this.player.health / 3) - this.player.health
+        character.attack = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.attack / 4,
+          this.dataGenerationServices.player.attack / 3) - this.dataGenerationServices.player.level
+        character.defense = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.defense / 4,
+          this.dataGenerationServices.player.defense / 3) - this.dataGenerationServices.player.level
+        character.health = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.health / 4,
+          this.dataGenerationServices.player.health / 3) - this.dataGenerationServices.player.health
 
         //Normal
-        character.critical = this.sharedServices.getRandomNumber(this.player.critical / 3, this.player.critical / 2)
-        character.agility = this.sharedServices.getRandomNumber(this.player.agility / 3, this.player.agility / 2)
+        character.critical = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.critical / 3,
+          this.dataGenerationServices.player.critical / 2)
+        character.agility = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.agility / 3,
+          this.dataGenerationServices.player.agility / 2)
         break;
       case 'Warrior':
         //Buff
-        character.attack = this.sharedServices.getRandomNumber(this.player.attack / 3, this.player.attack / 2) + this.player.level
-        character.defense = this.sharedServices.getRandomNumber(this.player.defense / 3, this.player.defense / 2) + this.player.level
-        character.health = this.sharedServices.getRandomNumber(this.player.health / 3, this.player.health / 2) + this.player.level
+        character.attack = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.attack / 3,
+          this.dataGenerationServices.player.attack / 2) + this.dataGenerationServices.player.level
+        character.defense = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.defense / 3,
+          this.dataGenerationServices.player.defense / 2) + this.dataGenerationServices.player.level
+        character.health = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.health / 3,
+          this.dataGenerationServices.player.health / 2) + this.dataGenerationServices.player.level
 
         //Nerf
-        character.agility = this.sharedServices.getRandomNumber(this.player.agility / 4, this.player.agility / 3) - this.player.level
-        character.critical = this.sharedServices.getRandomNumber(this.player.critical / 4, this.player.critical / 3) - this.player.level
+        character.agility = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.agility / 4,
+          this.dataGenerationServices.player.agility / 3) - this.dataGenerationServices.player.level
+        character.critical = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.critical / 4,
+          this.dataGenerationServices.player.critical / 3) - this.dataGenerationServices.player.level
 
         //Normal
-        character.mana = this.sharedServices.getRandomNumber(this.player.mana / 3, this.player.mana / 2)
-        character.wisdom = this.sharedServices.getRandomNumber(this.player.wisdom / 3, this.player.wisdom / 2)
+        character.mana = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.mana / 3,
+          this.dataGenerationServices.player.mana / 2)
+        character.wisdom = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.wisdom / 3,
+          this.dataGenerationServices.player.wisdom / 2)
         break;
     }
 
     if(isBoss){
-      character.attack = this.sharedServices.getRandomNumber(this.player.attack / 2, this.player.attack) + this.player.level
-      character.defense = this.sharedServices.getRandomNumber(this.player.defense / 2, this.player.defense) + this.player.level
-      character.health = this.sharedServices.getRandomNumber(this.player.health /2, this.player.health) + this.player.level
-      character.agility = this.sharedServices.getRandomNumber(this.player.agility /2, this.player.agility) + this.player.level
-      character.critical = this.sharedServices.getRandomNumber(this.player.critical /2, this.player.critical) + this.player.level
-      character.mana = this.sharedServices.getRandomNumber(this.player.mana /2, this.player.mana) + this.player.level
-      character.wisdom = this.sharedServices.getRandomNumber(this.player.wisdom /2, this.player.wisdom) + this.player.level
+      character.attack = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.attack / 2,
+        this.dataGenerationServices.player.attack) + this.dataGenerationServices.player.level
+      character.defense = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.defense / 2,
+        this.dataGenerationServices.player.defense) + this.dataGenerationServices.player.level
+      character.health = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.health /2,
+        this.dataGenerationServices.player.health) + this.dataGenerationServices.player.level
+      character.agility = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.agility /2,
+        this.dataGenerationServices.player.agility) + this.dataGenerationServices.player.level
+      character.critical = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.critical /2,
+        this.dataGenerationServices.player.critical) + this.dataGenerationServices.player.level
+      character.mana = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.mana /2,
+        this.dataGenerationServices.player.mana) + this.dataGenerationServices.player.level
+      character.wisdom = this.sharedServices.getRandomNumber(this.dataGenerationServices.player.wisdom /2,
+        this.dataGenerationServices.player.wisdom) + this.dataGenerationServices.player.level
     }
 
     character.health = Math.floor(character.health)
