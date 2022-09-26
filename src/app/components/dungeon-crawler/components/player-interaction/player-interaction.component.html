@@ -1,23 +1,76 @@
 <div class="player-menu-container">
   <div *ngIf="dataGenerationServices.player.class !== 'NoClass'">
     <div class="event-details">
+
+      <!--Defeat Screen-->
+      <div class="defeat-details">
+        <!--Enemy Defeat-->
+        <span *ngIf="currentField?.danger?.enemy &&
+        dataGenerationServices.player.health <= 0">You have lost against {{currentField.danger.enemy.name}}!</span>
+        <!--Trap Defeat-->
+        <span *ngIf="currentField?.danger?.trap &&
+        dataGenerationServices.player.health <= 0">A trap killed you!</span>
+      </div>
+
       <!--Enemy-->
-      <div class="enemy-details" *ngIf="currentField?.danger?.enemy && currentField?.danger?.enemy?.health > 0">
-      {{ currentField?.danger?.enemy?.name}}
-      <img src="assets/Rogue.png" class="enemy-image"/>
-      <div>
-      </div>
-        <br>
-        Health: {{ currentField?.danger?.enemy?.health }}
-        <br>
-        Class: {{ currentField?.danger?.enemy?.class }}
+      <div class="enemy-details" *ngIf="currentField?.danger?.enemy &&
+        currentField?.danger?.enemy?.health > 0 &&
+        dataGenerationServices.player.health >= 0"
+      >
+        {{ currentField?.danger?.enemy?.name}}
+        <img src="assets/Rogue.png" class="enemy-image"/>
+        <div class="enemy-details-status">
+          <div>
+            Class: {{currentField?.danger?.enemy?.class}}
+            <br>
+            Health: {{currentField?.danger?.enemy?.health}}
+          </div>
+          <div>
+            Attack: {{currentField?.danger?.enemy?.attack}}
+            <br>
+            Defense: {{currentField?.danger?.enemy?.defense}}
+            <br>
+            Agility: {{currentField?.danger?.enemy?.agility}}
+          </div>
+          <div>
+            Critical: {{currentField?.danger?.enemy?.critical}}
+            <br>
+            Mana: {{currentField?.danger?.enemy?.mana}}
+            <br>
+            Wisdom: {{currentField?.danger?.enemy?.wisdom}}
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="character-details">
-      <img src="assets/{{dataGenerationServices.player.class}}.png" class="explored-field-image"/>
+      <div class="character-details-profile-health">
+        Health: {{dataGenerationServices.player.health}}
+        <img src="assets/{{dataGenerationServices.player.class}}.png" class="explored-field-image"/>
+      </div>
+      <div>
+        Attack: {{dataGenerationServices.player.attack}}
+        <br>
+        Defense: {{dataGenerationServices.player.defense}}
+        <br>
+        Agility: {{dataGenerationServices.player.agility}}
+      </div>
+      <div>
+        Critical: {{dataGenerationServices.player.critical}}
+        <br>
+        Mana: {{dataGenerationServices.player.mana}}
+        <br>
+        Wisdom: {{dataGenerationServices.player.wisdom}}
+      </div>
     </div>
-    <div class="player-interactions-container">
-      <player-actions [(currentField)]="currentField"></player-actions>
+    <div class="player-interactions-container" >
+      <player-actions
+        *ngIf="dataGenerationServices.player.health > 0"
+        [(currentField)]="currentField"
+      ></player-actions>
+      <div *ngIf="dataGenerationServices.player.health <= 0">
+        <button (click)="resetCharacter()">Reset Game</button>
+      </div>
     </div>
   </div>
   <div *ngIf="dataGenerationServices.player.class === 'NoClass'">

@@ -8,7 +8,7 @@ import {SharedServices} from "../shared-services/shared-services.service";
 @Injectable({
   providedIn: 'root'
 })
-export class DataGenerationServices implements OnInit{
+export class DataGenerationServices {
 
   player: Character
   board = []
@@ -28,11 +28,5 @@ export class DataGenerationServices implements OnInit{
       currentField: 0,
     }
   }
-
-  ngOnInit() {
-
-  }
-
-
 
 }

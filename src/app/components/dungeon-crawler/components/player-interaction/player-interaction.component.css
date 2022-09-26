@@ -13,11 +13,28 @@
 .enemy-details{
   display: flex;
   flex-direction: column;
-  min-height: 200px;
+  align-items: center;
+  justify-content: center;
+}
+
+.enemy-details-status{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .character-details{
   min-height: 170px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.character-details-profile-health{
+  display: flex;
+  flex-direction: column;
 }
 
 .player-interactions-container{

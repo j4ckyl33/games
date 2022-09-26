@@ -1,8 +1,16 @@
 <div class="border">
   <div class="grid-container" *ngFor="let field of dataGenerationServices.board">
     <div *ngFor="let oneField of field">
-      <img src="assets/{{dataGenerationServices.player.class}}.png" class="explored-field-image" *ngIf="dataGenerationServices.player.currentField === oneField.index"/>
-      <img src="assets/dice_icon.png" class="unexplored-field-image" *ngIf="dataGenerationServices.player.currentField !== oneField.index"/>
+      <img
+        src="assets/{{dataGenerationServices.player.class}}.png"
+        class="explored-field-image"
+        *ngIf="dataGenerationServices.player.currentField === oneField.index"
+      />
+      <img
+        src="assets/dice_icon.png"
+        class="unexplored-field-image"
+        [ngStyle]="{'opacity': oneField.visited ? '0.3' : '1'}"
+        *ngIf="dataGenerationServices.player.currentField !== oneField.index"/>
     </div>
   </div>
 </div>

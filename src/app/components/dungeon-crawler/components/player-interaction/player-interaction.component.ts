@@ -13,8 +13,19 @@ export class PlayerInteractionComponent {
 
   constructor(public dataGenerationServices: DataGenerationServices) {}
 
-  ngOnInit() {
-
+  resetCharacter(): void {
+    this.dataGenerationServices.player = {
+      name: 'testPlayer',
+      class: 'NoClass',
+      level: 1,
+      health: 0,
+      defense: 0,
+      attack: 0,
+      agility: 0,
+      critical: 0,
+      mana: 0,
+      wisdom: 0,
+      currentField: 0,
+    }
   }
-
 }

@@ -80,6 +80,7 @@ export class BoardComponent implements OnInit{
   characterGrowth(): void {}
 
   generateFields(): void {
+    this.dataGenerationServices.board = []
     let counter = 0
     let bossExist = false
     for(let i = 0; i < 8; i++){
@@ -104,6 +105,7 @@ export class BoardComponent implements OnInit{
       }
       this.dataGenerationServices.board.push(tempArray)
     }
+    this.dataGenerationServices.board[0][0].visited = true
   }
 
   generateClassBasedCharacter(characterClass: CharacterClass, isBoss: boolean, character: Character): Character {
