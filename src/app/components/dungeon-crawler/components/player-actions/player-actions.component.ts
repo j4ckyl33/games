@@ -93,17 +93,34 @@ export class PlayerActionsComponent {
           this.dataGenerationServices.player.health -= this.battleLogic(this.currentField.danger.enemy,
             this.dataGenerationServices.player)
         }
-
+        break
+      case 'magic':
+        break
+      case 'flee':
+        if(this.fleeLogic(this.dataGenerationServices.player)){
+          this.currentField.danger = null
+        }else{
+          this.dataGenerationServices.player.health -= this.battleLogic(this.currentField.danger.enemy,
+            this.dataGenerationServices.player)
+        }
         break
     }
   }
 
-  battleLogic(attacker: Character, defender: Character): number{
+  private battleLogic(attacker: Character, defender: Character): number {
     let randomNumber = this.sharedService.getRandomNumber(0, 1000)
     //dodged only relevant till 1000 need to think about another solution
     if(defender.agility > randomNumber){
       return 0
     }
     return attacker.attack - defender.defense
+  }
+
+  private fleeLogic(character: Character): boolean {
+    let randomNumber = this.sharedService.getRandomNumber(0, 100)
+    if(character.agility + 30 > randomNumber){
+      return true
+    }
+    return false
   }
 }

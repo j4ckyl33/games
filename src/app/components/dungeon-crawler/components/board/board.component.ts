@@ -22,6 +22,20 @@ const enemyNames: string[] = ['Reckless Branch', 'Bright Hornet', 'Focused Bloss
   'Phasegirl', 'The Delirious Troglodyte', 'The Blind Entity', 'The Defiant Fiend',
   'The Iron-Scaled Mountain Panther', 'The Titanium Berserker Cobra', 'The Aquatic Frost Lizard']
 
+const spellNames = ['Thunder Rocket','Mystic Flash','Thunder Arrow','Spellsteal','Summon Elemental','Call of Hope',
+  'Rune of Venom','Evocation of Magic','Vision Rune','Mutation of Immortality','Holy Ray','Hellfire Rupture',
+  'Spirit Explosion','Torrent','Misery','Spellshield of Precision','Bolt of Guardian Spirits','Ferocity of the Moon',
+  'Corruption of Blessings','Alteration of Honesty','Blazing Explosion','Unholy Spike','Blazing Orb','Bane','Suffering',
+  'Beam of Twilight','Rune of the Arcane','Imitation of Life','Solitude of Death','Serenity of Light','Lunar Shower',
+  'Death Tempest','Hellfire Burn','Nightmare','Nature Attunement','Hymn of Dispersion','Flare of Soul Fire',
+  'Extortion of Doom','Distortion of Hysteria','Eruption of Failures','Spirit Explosion','Lunar Salvo','Thunder Blaze',
+  'Fire Defence','Ice Defence','Orb of Healing','Blast of Exhaustion','Reprisal Burst','Void of Seals',
+  'Metamorphosis of Vitality','Soul Barrage','Fire Missiles','Soul Rocket','Genesis','Fissure','Blast of Rage',
+  'Ball of Devouring','Virtue of the Stars','Indignation of the Spirit','Incantation Gift','Spirit Missiles',
+  'Esoteric Rain','Mind Rage','Ecstasy','Tremor','Flash of Ancestors','Ceremony of Decimation','Mutation Curse',
+  'Incantation Hex','Delusion Curse','Fire Torrent','Air Wrath','Lunar Flash','Enhance','Conjure Clone',
+  'Ring of Chaos','Hymn of Frost','Decimation of Perfection','Virtue Spellshield','Justice of the Nether']
+
 @Component({
   selector: 'board',
   templateUrl: './board.component.html',
@@ -46,13 +60,13 @@ export class BoardComponent implements OnInit{
     if(randNumber === 1 && !bossExist) {
       this.generateEnemy(currField, character, bossExist)
       return true
-    }/*else if(randNumber >= 0 && randNumber < 25){
+    }else if(randNumber >= 0 && randNumber < 25){
       currField.danger = {
         trap: damage,
         enemy: null,
       }
       return false
-    }*/else{
+    }else{
       this.generateEnemy(currField, character, bossExist)
       return false
     }
@@ -93,7 +107,7 @@ export class BoardComponent implements OnInit{
         if( (j === 0 && i === 0) || (randNumber >= 0 && randNumber < 50)){ // Generate Nothing
           field.danger = null
           field.reward = null
-        }else if(/*randNumber >= 50 && randNumber < 75*/true){
+        }else if(randNumber >= 50 && randNumber < 75){
           bossExist = this.generateDanger(field, this.dataGenerationServices.player, bossExist)
         }else { // Generate Hidden Rewards
           field.danger = null

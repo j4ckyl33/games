@@ -1,9 +1,6 @@
-import {Injectable, OnInit} from '@angular/core';
-import {Character, CharacterClass, Field} from "../../../types/types.service";
+import {Injectable} from '@angular/core';
+import {Character} from "../../../types/types.service";
 import {SharedServices} from "../shared-services/shared-services.service";
-
-
-
 
 @Injectable({
   providedIn: 'root'

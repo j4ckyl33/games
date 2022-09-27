@@ -27,5 +27,6 @@ export class PlayerInteractionComponent {
       wisdom: 0,
       currentField: 0,
     }
+    this.currentField = null
   }
 }

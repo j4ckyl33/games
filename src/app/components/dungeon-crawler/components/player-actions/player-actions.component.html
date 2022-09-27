@@ -3,7 +3,7 @@
     <input type="button" value="Attack" (click)="battleOptions('attack')">
     <input type="button" value="Magic">
     <input type="button" value="Item">
-    <input type="button" value="Flee">
+    <input type="button" value="Flee" (click)="battleOptions('flee')">
   </div>
   <div class="player-movement-interactions" *ngIf="currentField?.danger?.enemy?.health <= 0 || !currentField?.danger">
     <div class="up-movement">

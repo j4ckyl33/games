@@ -21,13 +21,25 @@ export type Character = {
   wisdom: number,
   spells?: [Spell?, Spell?, Spell?],
   currentField?: number,
+  bag: Bag,
+  equipment: Equipment
 }
-/*
+
+export type Bag = {
+  spells?: Spell[],
+  item?: Item[],
+  gold?: number,
+  breastplate?: Breastplate[],
+  weapon?: Weapon[],
+  boots?: Boots[],
+  magicItems?: MagicItem[]
+}
+
 type Equipment = {
-  breastplate: Breastplate,
-  weapon: Weapon,
-  boots: Boots,
-  magicItem: MagicItem
+  breastplate?: Breastplate,
+  weapon?: Weapon,
+  boots?: Boots,
+  magicItem?: MagicItem
 }
 
 type Item = {
@@ -64,7 +76,7 @@ type MagicItem = {
   mana: number,
   wisdom: number,
   rarity: Rarity
-}*/
+}
 
 type Spell = {
   name: string,
