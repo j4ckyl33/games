@@ -132,7 +132,9 @@ export class BoardComponent implements OnInit{
       defense: 0,
       health: 0,
       mana: 0,
-      wisdom: 0
+      wisdom: 0,
+      bag: {},
+      equipment: {}
     }
     switch (character.class){
       case 'Barbarian':

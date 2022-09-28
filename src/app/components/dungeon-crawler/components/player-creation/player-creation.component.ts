@@ -30,6 +30,8 @@ export class PlayerCreationComponent {
       critical: this.sharedServices.getRandomNumber(1, 5),
       mana: this.sharedServices.getRandomNumber(1, 5),
       wisdom: this.sharedServices.getRandomNumber(1, 5),
+      bag: {},
+      equipment: {},
       currentField: 0,
     }
 
@@ -46,6 +48,8 @@ export class PlayerCreationComponent {
           critical: this.sharedServices.getRandomNumber(1, 5),
           mana: this.sharedServices.getRandomNumber(1, 5),
           wisdom: this.sharedServices.getRandomNumber(1, 5),
+          bag: {},
+          equipment: {},
           currentField: 0,
         }
         break
@@ -61,6 +65,8 @@ export class PlayerCreationComponent {
           critical: this.sharedServices.getRandomNumber(1, 5),
           mana: this.sharedServices.getRandomNumber(1, 5),
           wisdom: this.sharedServices.getRandomNumber(1, 5),
+          bag: {},
+          equipment: {},
           currentField: 0,
         }
         break
@@ -76,6 +82,8 @@ export class PlayerCreationComponent {
           critical: this.sharedServices.getRandomNumber(1, 5),
           mana: this.sharedServices.getRandomNumber(1, 5),
           wisdom: this.sharedServices.getRandomNumber(1, 5),
+          bag: {},
+          equipment: {},
           currentField: 0,
         }
         break
@@ -91,6 +99,8 @@ export class PlayerCreationComponent {
           critical: this.sharedServices.getRandomNumber(1, 5),
           mana: this.sharedServices.getRandomNumber(1, 5),
           wisdom: this.sharedServices.getRandomNumber(1, 5),
+          bag: {},
+          equipment: {},
           currentField: 0,
         }
         break

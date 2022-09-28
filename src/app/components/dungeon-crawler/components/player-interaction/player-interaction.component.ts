@@ -26,6 +26,8 @@ export class PlayerInteractionComponent {
       mana: 0,
       wisdom: 0,
       currentField: 0,
+      bag: {},
+      equipment: {},
     }
     this.currentField = null
   }
