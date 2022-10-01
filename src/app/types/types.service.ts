@@ -42,7 +42,7 @@ type Equipment = {
   magicItem?: MagicItem
 }
 
-type Item = {
+export type Item = {
   name: string,
   damage?: number,
   heal?: number,
@@ -50,35 +50,35 @@ type Item = {
   rarity: Rarity
 }
 
-type Breastplate = {
+export type Breastplate = {
   name: string,
   health: number,
   defense: number,
   rarity: Rarity
 }
 
-type Weapon = {
+export type Weapon = {
   name: string,
   attack: number,
   critical: number,
   rarity: Rarity
 }
 
-type Boots = {
+export type Boots = {
   name: string,
   agility: number,
   critical: number,
   rarity: Rarity
 }
 
-type MagicItem = {
+export type MagicItem = {
   name: string,
   mana: number,
   wisdom: number,
   rarity: Rarity
 }
 
-type Spell = {
+export type Spell = {
   name: string,
   damage: number,
   heal: number,

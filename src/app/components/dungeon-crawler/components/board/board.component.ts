@@ -1,5 +1,15 @@
 import {Component, OnInit } from '@angular/core';
-import {Character, CharacterClass, Field} from "../../../../types/types.service";
+import {
+  Boots,
+  Breastplate,
+  Character,
+  CharacterClass,
+  Field,
+  Item,
+  MagicItem,
+  Weapon,
+  Spell
+} from "../../../../types/types.service";
 import {SharedServices} from "../../shared-services/shared-services.service";
 import {DataGenerationServices} from "../../services/data-generation-service.service";
 
@@ -92,6 +102,45 @@ export class BoardComponent implements OnInit{
 
   generateSpell():void {}
   characterGrowth(): void {}
+
+  generateItems(): void {
+    let randomNumber = this.sharedServices.getRandomNumber(0, 6)
+    let itemOptions = ['breastplate', 'weapon', 'boots', 'magicItem', 'item', 'spell']
+    this.generateSpecificItems(itemOptions[randomNumber])
+  }
+
+  generateSpecificItems(specification: string): Breastplate | Weapon | Boots | MagicItem | Item | Spell {
+    let item: Breastplate | Weapon | Boots | MagicItem | Item | Spell
+    let scalingFactor = this.determineRarity(item)
+    switch (specification){
+      case 'breastplate':
+        item = {
+          name: 'Breastplate',
+          health: this.sharedServices.getRandomNumber(1, this.dataGenerationServices.player.health / scalingFactor),
+          defense: this.sharedServices.getRandomNumber(1, this.dataGenerationServices.player.defense / scalingFactor),
+          rarity: item.rarity
+        }
+        break
+    }
+    return item
+  }
+
+  determineRarity(item: Breastplate | Weapon | Boots | MagicItem | Item | Spell): number {
+    let randomNumber = this.sharedServices.getRandomNumber(0, 100)
+    if(randomNumber >= 0 && randomNumber < 50){ // Common
+      item.rarity = 'Common'
+      return 4
+    }else if(randomNumber >= 50 && randomNumber < 85){ // Rare
+      item.rarity = 'Rare'
+      return 3
+    }else if(randomNumber >= 85 && randomNumber < 95){ // Epic
+      item.rarity = 'Epic'
+      return 2
+    }else{ // Legendary
+      item.rarity = 'Legendary'
+      return 1
+    }
+  }
 
   generateFields(): void {
     this.dataGenerationServices.board = []
