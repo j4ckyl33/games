@@ -2,17 +2,17 @@
   <div *ngIf="dataGenerationServices.player.class !== 'NoClass'">
     <div class="event-details">
 
-      <!--Defeat Screen-->
+      <!--Defeat Event-->
       <div class="defeat-details">
-        <!--Enemy Defeat-->
+        <!--Defeated by an enemy-->
         <span *ngIf="currentField?.danger?.enemy &&
         dataGenerationServices.player.health <= 0">You have lost against {{currentField.danger.enemy.name}}!</span>
-        <!--Trap Defeat-->
+        <!--Defeated by a trap-->
         <span *ngIf="currentField?.danger?.trap &&
         dataGenerationServices.player.health <= 0">A trap killed you!</span>
       </div>
 
-      <!--Enemy-->
+      <!--Enemy Event-->
       <div class="enemy-details" *ngIf="currentField?.danger?.enemy &&
         currentField?.danger?.enemy?.health > 0 &&
         dataGenerationServices.player.health >= 0"
@@ -41,6 +41,16 @@
           </div>
         </div>
       </div>
+
+      <!--Item Event-->
+      <div
+        class = "item-details"
+        *ngIf="isRewardEmpty()"
+      >
+        You have obtained the item {{reward?.name}}
+        <img src="assets/Item.png" class="item-image"/>
+      </div>
+
     </div>
 
     <div class="character-details">
@@ -66,7 +76,8 @@
     <div class="player-interactions-container" >
       <player-actions
         *ngIf="dataGenerationServices.player.health > 0"
-        [(currentField)]="currentField"
+        [currentField] = "currentField"
+        (currentFieldChange) = "currentFieldChange($event)"
       ></player-actions>
       <div *ngIf="dataGenerationServices.player.health <= 0">
         <button (click)="resetCharacter()">Reset Game</button>

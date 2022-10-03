@@ -28,7 +28,6 @@ export type Character = {
 export type Bag = {
   spells?: Spell[];
   item?: ConsumableItem[];
-  gold?: number;
   breastplate?: Breastplate[];
   weapon?: Weapon[];
   boots?: Boots[];

@@ -275,6 +275,7 @@ export class BoardComponent implements OnInit {
       'magicItem',
       'item',
       'spell',
+      'gold'
     ];
     return this.generateSpecificItems(itemOptions[randomNumber]);
   }
@@ -288,9 +289,7 @@ export class BoardComponent implements OnInit {
       | Boots
       | MagicItem
       | ConsumableItem
-      | Spell = <
-      Breastplate | Weapon | Boots | MagicItem | ConsumableItem | Spell
-    >{};
+      | Spell = <Breastplate | Weapon | Boots | MagicItem | ConsumableItem | Spell>{};
     let scalingFactor = this.determineRarity(item);
 
     switch (specification) {
@@ -492,11 +491,11 @@ export class BoardComponent implements OnInit {
         let field: Field = <Field>{};
         let randNumber = this.sharedServices.getRandomNumber(0, 100);
         // Generates possible Danger
-        if ((j === 0 && i === 0) || (randNumber >= 0 && randNumber < 50)) {
+        if (false/* (j === 0 && i === 0) || (randNumber >= 0 && randNumber < 50) */) {
           // Generate Nothing
           field.danger = null;
           field.reward = null;
-        } else if (randNumber >= 50 && randNumber < 75) {
+        } else if (/* randNumber >= 50 && randNumber < 75 */ false) {
           bossExist = this.generateDanger(
             field,
             this.dataGenerationServices.player,
@@ -515,8 +514,6 @@ export class BoardComponent implements OnInit {
       this.dataGenerationServices.board.push(tempArray);
     }
     this.dataGenerationServices.board[0][0].visited = true;
-    console.log(this.dataGenerationServices.board);
-    console.log(this.dataGenerationServices.player);
   }
 
   generateClassBasedCharacter(
