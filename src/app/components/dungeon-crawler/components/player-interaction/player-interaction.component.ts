@@ -46,7 +46,7 @@ export class PlayerInteractionComponent {
   currentFieldChange(event: any): void {
     this.currentField = event
     this.reward = <Breastplate | Weapon | Boots | MagicItem | ConsumableItem | Spell>{}
-    if(this.currentField?.reward === null) { return }
+    if(this.currentField.reward === null) { return }
     this.reward = this.currentField.reward
 
     if('defense' in this.currentField.reward) { // Breastplate
@@ -63,14 +63,6 @@ export class PlayerInteractionComponent {
     }else{ // Consumable Item
       this.dataGenerationServices.player.bag.item.push(this.currentField.reward)
     }
-
-     /* for (let i = 0; i < this.dataGenerationServices.board.length; i++) {
-      for (let j = 0; j < this.dataGenerationServices.board[i].length; j++) {
-        if (this.dataGenerationServices.board[i][j].index === this.currentField.index) {
-          this.currentField.reward = null;
-        }
-      }
-    } */
     this.currentField.reward = null;
     console.log(this.dataGenerationServices.board)
     console.log(this.dataGenerationServices.player)

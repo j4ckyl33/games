@@ -491,16 +491,17 @@ export class BoardComponent implements OnInit {
         let field: Field = <Field>{};
         let randNumber = this.sharedServices.getRandomNumber(0, 100);
         // Generates possible Danger
-        if (false/* (j === 0 && i === 0) || (randNumber >= 0 && randNumber < 50) */) {
+        if ((j === 0 && i === 0) || (randNumber >= 0 && randNumber < 50)) {
           // Generate Nothing
           field.danger = null;
           field.reward = null;
-        } else if (/* randNumber >= 50 && randNumber < 75 */ false) {
+        } else if (randNumber >= 50 && randNumber < 75) {
           bossExist = this.generateDanger(
             field,
             this.dataGenerationServices.player,
             bossExist
           );
+          field.reward = null
         } else {
           // Generate Hidden Rewards
           field.danger = null;
@@ -513,6 +514,8 @@ export class BoardComponent implements OnInit {
       }
       this.dataGenerationServices.board.push(tempArray);
     }
+    let randNumber = this.sharedServices.getRandomNumber(1, 9)
+    this.dataGenerationServices.board
     this.dataGenerationServices.board[0][0].visited = true;
   }
 
