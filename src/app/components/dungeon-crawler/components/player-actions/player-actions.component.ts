@@ -22,6 +22,7 @@ export class PlayerActionsComponent {
 
   playerMovement(movement: string) {
     let tempField: Field
+    this.dataGenerationServices.nextLevel = false
 
     switch (movement) {
       case 'up':

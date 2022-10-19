@@ -1,4 +1,5 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import {Character} from "../../../types/types.service";
 import {SharedServices} from "../shared-services/shared-services.service";
 
@@ -9,6 +10,9 @@ export class DataGenerationServices {
 
   player: Character
   board = []
+  floor = 1
+  nextLevel = false
+  resetBoard$ = new BehaviorSubject(false)
 
   constructor(private sharedServices: SharedServices) {
     this.player = {
@@ -23,7 +27,7 @@ export class DataGenerationServices {
       mana: 0,
       wisdom: 0,
       currentField: 0,
-      bag: {},
+      bag: [],
       equipment: {},
     }
   }

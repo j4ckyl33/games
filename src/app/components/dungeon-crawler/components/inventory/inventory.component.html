@@ -1,1 +1,8 @@
-<p>inventory works!</p>
+<div class="inventory-interactions">
+    <ng-container  *ngIf="currentItem === null">
+        <input type="button" (click)="showItemInformation(item)" value="{{item.name}}" *ngFor="let item of bag">
+    </ng-container>
+    <div *ngIf="currentItem !== null">
+        <p>Item Information</p>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Boots, Breastplate, CharacterClass, ConsumableItem, MagicItem, Spell, Weapon } from "../../../../types/types.service";
+import { Bag, Boots, Breastplate, CharacterClass, ConsumableItem, MagicItem, Spell, Weapon } from "../../../../types/types.service";
 import { DataGenerationServices } from "../../services/data-generation-service.service";
 import { SharedServices } from "../../shared-services/shared-services.service";
 
@@ -19,6 +19,44 @@ export class PlayerCreationComponent {
   }
 
   createPlayer(characterClass: CharacterClass): void {
+
+    let test: Bag[] = [{
+      name: 'test',
+      health: 1,
+      defense: 1,
+      rarity: 'Rare'
+    },{
+      name: 'test2',
+      health: 1,
+      defense: 1,
+      rarity: 'Rare'
+    },{
+      name: 'test3',
+      health: 1,
+      defense: 1,
+      rarity: 'Rare'
+    },{
+      name: 'test4',
+      health: 1,
+      defense: 1,
+      rarity: 'Rare'
+    },{
+      name: 'test5',
+      health: 1,
+      defense: 1,
+      rarity: 'Rare'
+    },{
+      name: 'test6',
+      health: 1,
+      defense: 1,
+      rarity: 'Rare'
+    },{
+      name: 'test7',
+      health: 1,
+      defense: 1,
+      rarity: 'Rare'
+    }
+    ]
     this.dataGenerationServices.player = {
       name: 'testPlayer',
       class: characterClass,
@@ -30,14 +68,7 @@ export class PlayerCreationComponent {
       critical: this.sharedServices.getRandomNumber(1, 5),
       mana: this.sharedServices.getRandomNumber(1, 5),
       wisdom: this.sharedServices.getRandomNumber(1, 5),
-      bag: {
-        spells: <Spell[]>[],
-        item: <ConsumableItem[]>[],
-        breastplate: <Breastplate[]>[],
-        weapon: <Weapon[]> [],
-        boots: <Boots[]>[],
-        magicItems: <MagicItem[]>[]
-      },
+      bag: test,
       equipment: {},
       currentField: 0,
     }
@@ -55,14 +86,7 @@ export class PlayerCreationComponent {
           critical: this.sharedServices.getRandomNumber(1, 5),
           mana: this.sharedServices.getRandomNumber(1, 5),
           wisdom: this.sharedServices.getRandomNumber(1, 5),
-          bag: {
-            spells: <Spell[]>[],
-            item: <ConsumableItem[]>[],
-            breastplate: <Breastplate[]>[],
-            weapon: <Weapon[]> [],
-            boots: <Boots[]>[],
-            magicItems: <MagicItem[]>[]
-          },
+          bag: [],
           equipment: {},
           currentField: 0,
         }
@@ -79,14 +103,7 @@ export class PlayerCreationComponent {
           critical: this.sharedServices.getRandomNumber(1, 5),
           mana: this.sharedServices.getRandomNumber(1, 5),
           wisdom: this.sharedServices.getRandomNumber(1, 5),
-          bag: {
-            spells: <Spell[]>[],
-            item: <ConsumableItem[]>[],
-            breastplate: <Breastplate[]>[],
-            weapon: <Weapon[]> [],
-            boots: <Boots[]>[],
-            magicItems: <MagicItem[]>[]
-          },
+          bag: test,
           equipment: {},
           currentField: 0,
         }
@@ -103,14 +120,7 @@ export class PlayerCreationComponent {
           critical: this.sharedServices.getRandomNumber(1, 5),
           mana: this.sharedServices.getRandomNumber(1, 5),
           wisdom: this.sharedServices.getRandomNumber(1, 5),
-          bag: {
-            spells: <Spell[]>[],
-            item: <ConsumableItem[]>[],
-            breastplate: <Breastplate[]>[],
-            weapon: <Weapon[]> [],
-            boots: <Boots[]>[],
-            magicItems: <MagicItem[]>[]
-          },
+          bag: [],
           equipment: {},
           currentField: 0,
         }
@@ -127,14 +137,7 @@ export class PlayerCreationComponent {
           critical: this.sharedServices.getRandomNumber(1, 5),
           mana: this.sharedServices.getRandomNumber(1, 5),
           wisdom: this.sharedServices.getRandomNumber(1, 5),
-          bag: {
-            spells: <Spell[]>[],
-            item: <ConsumableItem[]>[],
-            breastplate: <Breastplate[]>[],
-            weapon: <Weapon[]> [],
-            boots: <Boots[]>[],
-            magicItems: <MagicItem[]>[]
-          },
+          bag: [],
           equipment: {},
           currentField: 0,
         }

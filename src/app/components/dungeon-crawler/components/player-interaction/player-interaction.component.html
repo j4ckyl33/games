@@ -51,6 +51,12 @@
         <img src="assets/Item.png" class="item-image"/>
       </div>
 
+      <!-- Next floor Event -->
+      <div class="floor-details" *ngIf="dataGenerationServices.nextLevel">
+        <p>You have reached the next Level {{dataGenerationServices.floor}}</p>
+        <img src="assets/Door.png" class="floor-image"/>
+      </div>
+
     </div>
 
     <div class="character-details">
@@ -73,6 +79,8 @@
         Wisdom: {{dataGenerationServices.player.wisdom}}
       </div>
     </div>
+
+    <!-- Player Interactions -->
     <div class="player-interactions-container" >
       <player-actions
         *ngIf="dataGenerationServices.player.health > 0"
@@ -82,6 +90,11 @@
       <div *ngIf="dataGenerationServices.player.health <= 0">
         <button (click)="resetCharacter()">Reset Game</button>
       </div>
+    </div>
+
+    <!-- Bag Interactions -->
+    <div class="bag-container">
+      <inventory></inventory>
     </div>
   </div>
   <div *ngIf="dataGenerationServices.player.class === 'NoClass'">

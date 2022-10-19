@@ -195,6 +195,9 @@ const spellNames = [
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
+
+  bossExist = false
+
   constructor(
     private sharedServices: SharedServices,
     public dataGenerationServices: DataGenerationServices
@@ -202,20 +205,27 @@ export class BoardComponent implements OnInit {
 
   ngOnInit() {
     this.generateFields();
+    this.dataGenerationServices.resetBoard$.subscribe(val => {
+      if(val === true){
+        this.generateFields();
+        this.dataGenerationServices.player.currentField = 0
+        this.dataGenerationServices.nextLevel = true
+        this.dataGenerationServices.floor++
+      }
+    })
   }
 
   generateDanger(
     currField: Field,
     character: Character,
-    bossExist: boolean
   ): boolean {
     let randNumber = this.sharedServices.getRandomNumber(0, 75);
     let damage = this.sharedServices.getRandomNumber(
       0,
       this.dataGenerationServices.player.health / 3
     );
-    if (randNumber === 1 && !bossExist) {
-      this.generateEnemy(currField, character, bossExist);
+    if (randNumber === 1 && !this.bossExist) {
+      this.generateEnemy(currField, character, true);
       return true;
     } else if (randNumber >= 0 && randNumber < 25) {
       currField.danger = {
@@ -224,12 +234,12 @@ export class BoardComponent implements OnInit {
       };
       return false;
     } else {
-      this.generateEnemy(currField, character, bossExist);
+      this.generateEnemy(currField, character, false);
       return false;
     }
   }
 
-  generateEnemy(currField: Field, character: Character, boss: boolean): void {
+  generateEnemy(currField: Field, character: Character, createBoss: boolean): void {
     let characterClasses: CharacterClass[] = [
       'Assassin',
       'Barbarian',
@@ -237,7 +247,7 @@ export class BoardComponent implements OnInit {
       'Warrior',
     ];
     let characterRandNumber = this.sharedServices.getRandomNumber(0, 4);
-    if (!boss) {
+    if (!this.bossExist && createBoss) {
       currField.danger = {
         trap: null,
         enemy: this.generateClassBasedCharacter(
@@ -246,6 +256,7 @@ export class BoardComponent implements OnInit {
           character
         ),
       };
+      this.bossExist = true
     } else {
       currField.danger = {
         trap: null,
@@ -482,8 +493,8 @@ export class BoardComponent implements OnInit {
 
   generateFields(): void {
     this.dataGenerationServices.board = [];
+    this.bossExist = false
     let counter = 0;
-    let bossExist = false;
     for (let i = 0; i < 8; i++) {
       let tempArray = [];
       for (let j = 0; j < 8; j++) {
@@ -496,10 +507,10 @@ export class BoardComponent implements OnInit {
           field.danger = null;
           field.reward = null;
         } else if (randNumber >= 50 && randNumber < 75) {
-          bossExist = this.generateDanger(
+          // Generate Enemies
+          this.bossExist = this.generateDanger(
             field,
-            this.dataGenerationServices.player,
-            bossExist
+            this.dataGenerationServices.player
           );
           field.reward = null
         } else {
@@ -514,9 +525,13 @@ export class BoardComponent implements OnInit {
       }
       this.dataGenerationServices.board.push(tempArray);
     }
-    let randNumber = this.sharedServices.getRandomNumber(1, 9)
-    this.dataGenerationServices.board
+    let randNumberX = this.sharedServices.getRandomNumber(1, 7)
+    let randNumberY = this.sharedServices.getRandomNumber(1, 7)
+    this.dataGenerationServices.board[randNumberY][randNumberX].danger = null
+    this.dataGenerationServices.board[randNumberY][randNumberX].reward = null
+    this.dataGenerationServices.board[randNumberY][randNumberX].end = true
     this.dataGenerationServices.board[0][0].visited = true;
+    console.log(this.dataGenerationServices.board)
   }
 
   generateClassBasedCharacter(
@@ -534,7 +549,7 @@ export class BoardComponent implements OnInit {
       health: 0,
       mana: 0,
       wisdom: 0,
-      bag: {},
+      bag: [],
       equipment: {},
     };
     switch (character.class) {
@@ -701,6 +716,7 @@ export class BoardComponent implements OnInit {
     }
 
     if (isBoss) {
+      character.name = 'BOSS'
       character.attack =
         this.sharedServices.getRandomNumber(
           this.dataGenerationServices.player.attack / 2,

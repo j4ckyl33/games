@@ -30,14 +30,7 @@ export class PlayerInteractionComponent {
       mana: 0,
       wisdom: 0,
       currentField: 0,
-      bag: {
-        spells: [<Spell>{}],
-        item: [<ConsumableItem>{}],
-        breastplate: [<Breastplate>{}],
-        weapon: [<Weapon>{}],
-        boots: [<Boots>{}],
-        magicItems: [<MagicItem>{}]
-      },
+      bag: [],
       equipment: {},
     }
     this.currentField = null
@@ -45,27 +38,15 @@ export class PlayerInteractionComponent {
 
   currentFieldChange(event: any): void {
     this.currentField = event
+    if(this.currentField.end === true){
+      this.dataGenerationServices.resetBoard$.next(true)
+    }
     this.reward = <Breastplate | Weapon | Boots | MagicItem | ConsumableItem | Spell>{}
     if(this.currentField.reward === null) { return }
     this.reward = this.currentField.reward
-
-    if('defense' in this.currentField.reward) { // Breastplate
-    }else if('attack' in this.currentField.reward) { // Weapon
-      this.dataGenerationServices.player.bag.weapon.push(this.currentField.reward)
-    }else if('agility' in this.currentField.reward) { // Boots
-      this.dataGenerationServices.player.bag.boots.push(this.currentField.reward)
-    }else if('wisdom' in this.currentField.reward) { // Magic Item
-      this.dataGenerationServices.player.bag.magicItems.push(this.currentField.reward)
-    }else if(('mana' in this.currentField.reward && 'damage' in this.currentField.reward) || 
-              ('mana' in this.currentField.reward && 'heal' in this.currentField.reward)
-            ) { // Spell
-      this.dataGenerationServices.player.bag.spells.push(this.currentField.reward)
-    }else{ // Consumable Item
-      this.dataGenerationServices.player.bag.item.push(this.currentField.reward)
-    }
+    this.dataGenerationServices.player.bag.push(this.currentField.reward)
+    console.log(this.dataGenerationServices.player.bag)
     this.currentField.reward = null;
-    console.log(this.dataGenerationServices.board)
-    console.log(this.dataGenerationServices.player)
   } 
 
   isRewardEmpty(): boolean {

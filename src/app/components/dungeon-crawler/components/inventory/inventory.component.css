@@ -1,0 +1,12 @@
+.inventory-interactions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.inventory-interactions input{
+    width: 350px;
+    height: 40px;
+    margin: 5px auto;
+}

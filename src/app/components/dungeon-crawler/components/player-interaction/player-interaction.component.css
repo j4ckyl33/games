@@ -10,12 +10,18 @@
   border: solid #5B6DCD 1px;
 }
 
-.enemy-details{
+.floor-details, .enemy-details, .item-details{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
+.floor-image{
+  max-width: 150px;
+  max-height: 150px;
+}
+
 
 .enemy-details-status{
   display: flex;
@@ -23,13 +29,6 @@
   justify-content: space-evenly;
   width: 100%;
   margin-top: 10px;
-}
-
-.item-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .item-image {
@@ -52,6 +51,13 @@
 
 .player-interactions-container{
   min-height: 100px;
+}
+
+.bag-container{
+  border: solid 1px black;
+  max-height: 160px;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .explored-field-image{
