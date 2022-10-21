@@ -81,20 +81,25 @@
     </div>
 
     <!-- Player Interactions -->
-    <div class="player-interactions-container" >
+    <div class="player-interactions-container" *ngIf="!bagToggle">
       <player-actions
         *ngIf="dataGenerationServices.player.health > 0"
         [currentField] = "currentField"
         (currentFieldChange) = "currentFieldChange($event)"
       ></player-actions>
+      <button>Bag</button>
       <div *ngIf="dataGenerationServices.player.health <= 0">
         <button (click)="resetCharacter()">Reset Game</button>
       </div>
     </div>
 
     <!-- Bag Interactions -->
-    <div class="bag-container">
-      <inventory></inventory>
+    <div class="bag-container" *ngIf="bagToggle">
+      <inventory
+        [bagToggle]="bagToggle"
+        (bagToggleChange)="bagToggleChange($event)"
+      >
+      </inventory>
     </div>
   </div>
   <div *ngIf="dataGenerationServices.player.class === 'NoClass'">

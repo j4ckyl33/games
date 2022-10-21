@@ -58,6 +58,7 @@
   max-height: 160px;
   overflow-y: auto;
   overflow-x: auto;
+  position: relative;
 }
 
 .explored-field-image{

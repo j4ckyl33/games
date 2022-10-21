@@ -1,12 +1,34 @@
-.inventory-interactions{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.inventory-interactions, .item-stats{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .inventory-interactions input{
-    width: 350px;
+    width: 250px;
     height: 40px;
     margin: 5px auto;
+}
+
+.item-image {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 40px;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+p {
+    margin: 0.5rem;
+}
+
+button {
+  position: absolute;
+  top: 3.5%;
+  left: 2%;
 }

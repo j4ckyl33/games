@@ -11,10 +11,12 @@ export class PlayerInteractionComponent {
 
   currentField: Field
   reward: Breastplate | Weapon | Boots | MagicItem | ConsumableItem | Spell
+  bagToggle: boolean
 
   constructor(public dataGenerationServices: DataGenerationServices) {
     this.reward = <Breastplate | Weapon | Boots | MagicItem | ConsumableItem | Spell>{}
-    console.log(this.dataGenerationServices.board)  
+    this.bagToggle = false
+    console.log(this.dataGenerationServices.board)
   }
 
   resetCharacter(): void {
@@ -47,12 +49,16 @@ export class PlayerInteractionComponent {
     this.dataGenerationServices.player.bag.push(this.currentField.reward)
     console.log(this.dataGenerationServices.player.bag)
     this.currentField.reward = null;
-  } 
+  }
 
   isRewardEmpty(): boolean {
     if(Object.keys(this.reward).length === 0) {
       return false
     }
     return true
+  }
+
+  bagToggleChange(event: any): void{
+    this.bagToggle = event
   }
 }

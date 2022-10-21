@@ -13,6 +13,7 @@ import { ShopComponent } from './components/dungeon-crawler/components/shop/shop
 import { InventoryComponent } from './components/dungeon-crawler/components/inventory/inventory.component';
 import { PlayerActionsComponent } from './components/dungeon-crawler/components/player-actions/player-actions.component';
 import { PlayerCreationComponent } from './components/dungeon-crawler/components/player-creation/player-creation.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,10 +29,11 @@ import { PlayerCreationComponent } from './components/dungeon-crawler/components
     PlayerActionsComponent,
     PlayerCreationComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

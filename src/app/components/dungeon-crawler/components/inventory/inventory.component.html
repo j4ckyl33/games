@@ -1,8 +1,24 @@
-<div class="inventory-interactions">
+<div class="inventory-container">
+
+  <!--Back Button-->
+  <div>
+    <button (click)="showInteractionClick()"><i class="material-icons">arrow_back</i></button>
+  </div>
+
+  <!--Item List and Details-->
+  <div class="inventory-interactions">
     <ng-container  *ngIf="currentItem === null">
         <input type="button" (click)="showItemInformation(item)" value="{{item.name}}" *ngFor="let item of bag">
     </ng-container>
-    <div *ngIf="currentItem !== null">
-        <p>Item Information</p>
+
+    <div *ngIf="currentItem !== null" class="item-details">
+      <div>
+        <button (click)="backClick()"><i class="material-icons">arrow_back</i></button>
+      </div>
+      <img src="assets/{{itemType}}.png" class="item-image">
+      <div class="item-stats">
+          <p *ngFor="let stat of currentItem | keyvalue">{{stat.key}}: {{stat.value}}</p>
+      </div>
     </div>
+  </div>
 </div>
