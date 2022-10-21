@@ -51,6 +51,7 @@
 
 .player-interactions-container{
   min-height: 100px;
+  position: relative;
 }
 
 .bag-container{
@@ -70,6 +71,17 @@
   max-width: 70px;
   max-height: 70px;
   margin-top: 20px;
+}
+
+.bag-image{
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.bag-button {
+  position: absolute;
+  bottom:0;
+  left:0;
 }
 
 
