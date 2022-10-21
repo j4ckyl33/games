@@ -87,7 +87,7 @@
         [currentField] = "currentField"
         (currentFieldChange) = "currentFieldChange($event)"
       ></player-actions>
-      <button>Bag</button>
+      <button (click)="bagToggle = !bagToggle">Bag</button>
       <div *ngIf="dataGenerationServices.player.health <= 0">
         <button (click)="resetCharacter()">Reset Game</button>
       </div>

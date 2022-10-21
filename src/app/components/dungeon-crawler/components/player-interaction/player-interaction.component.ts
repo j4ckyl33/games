@@ -16,7 +16,6 @@ export class PlayerInteractionComponent {
   constructor(public dataGenerationServices: DataGenerationServices) {
     this.reward = <Breastplate | Weapon | Boots | MagicItem | ConsumableItem | Spell>{}
     this.bagToggle = false
-    console.log(this.dataGenerationServices.board)
   }
 
   resetCharacter(): void {

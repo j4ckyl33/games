@@ -45,6 +45,6 @@ export class InventoryComponent implements OnInit {
   }
 
   showInteractionClick(): void {
-    this.bagToggleChange.emit(true)
+    this.bagToggleChange.emit(false)
   }
 }
