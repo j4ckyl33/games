@@ -36,9 +36,9 @@ type Equipment = {
 
 export type ConsumableItem = {
   name: string;
-  heal?: number;
-  booststats?: number;
-  damage?: number;
+  heal: number;
+  booststats: number;
+  damage: number;
   rarity: Rarity;
 };
 
@@ -72,8 +72,8 @@ export type MagicItem = {
 
 export type Spell = {
   name: string;
-  damage?: number;
-  heal?: number;
+  damage: number;
+  heal: number;
   mana: number;
   rarity: Rarity;
 };

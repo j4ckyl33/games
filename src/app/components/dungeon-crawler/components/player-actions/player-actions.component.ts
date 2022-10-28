@@ -71,6 +71,7 @@ export class PlayerActionsComponent {
         }
         break
     }
+    console.log(tempField)
     this.currentField = this.sharedService.findCurrentField(this.dataGenerationServices.board, this.dataGenerationServices.player.currentField )
   }
 
@@ -89,10 +90,16 @@ export class PlayerActionsComponent {
           //Player Attack
           this.currentField.danger.enemy.health -= this.battleLogic(this.dataGenerationServices.player,
             this.currentField.danger.enemy)
-          if(this.currentField.danger.enemy.health <= 0) {break}
+          if(this.currentField.danger.enemy.health <= 0) {
+            this.currentField.danger.enemy = null
+            break
+          }
           //Enemy Attack
           this.dataGenerationServices.player.health -= this.battleLogic(this.currentField.danger.enemy,
             this.dataGenerationServices.player)
+        }
+        if(this.currentField.danger.enemy.health <= 0){
+          this.currentField.danger.enemy = null
         }
         break
       case 'magic':

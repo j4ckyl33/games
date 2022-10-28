@@ -1,8 +1,8 @@
 <div class="inventory-container">
 
   <!--Back Button-->
-  <div>
-    <button (click)="showInteractionClick()"><i class="material-icons">arrow_back</i></button>
+  <div *ngIf="currentItem === null">
+    <button (click)="showInteractionClick()" class="button-interactions"><i class="material-icons">arrow_back</i></button>
   </div>
 
   <!--Item List and Details-->
@@ -12,8 +12,9 @@
     </ng-container>
 
     <div *ngIf="currentItem !== null" class="item-details">
-      <div>
-        <button (click)="backClick()"><i class="material-icons">arrow_back</i></button>
+      <div class="button-interactions">
+        <button (click)="backClick()" class="back-button"><i class="material-icons">arrow_back</i></button>
+        <button (click)="equip()">Equip</button>
       </div>
       <img src="assets/{{itemType}}.png" class="item-image">
       <div class="item-stats">

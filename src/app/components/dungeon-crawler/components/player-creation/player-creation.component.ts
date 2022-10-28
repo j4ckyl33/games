@@ -27,8 +27,8 @@ export class PlayerCreationComponent {
       rarity: 'Rare'
     },{
       name: 'test2',
-      health: 1,
-      defense: 1,
+      mana: 1,
+      wisdom: 1,
       rarity: 'Rare'
     },{
       name: 'test3',
@@ -143,5 +143,6 @@ export class PlayerCreationComponent {
         }
         break
     }
+    this.dataGenerationServices.playerFullHealth = this.dataGenerationServices.player.health
   }
 }

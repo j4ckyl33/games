@@ -211,6 +211,7 @@ export class BoardComponent implements OnInit {
         this.dataGenerationServices.player.currentField = 0
         this.dataGenerationServices.nextLevel = true
         this.dataGenerationServices.floor++
+        this.dataGenerationServices.player.health = this.dataGenerationServices.playerFullHealth
       }
     })
   }
@@ -361,6 +362,13 @@ export class BoardComponent implements OnInit {
         };
         return item;
       case 'item':
+        item = {
+          name: 'Consumable',
+          booststats: null,
+          heal: null,
+          damage: null,
+          rarity: item.rarity,
+        };
         item = this.generateConsumableItem(item, scalingFactor);
         return item;
         break;
@@ -368,6 +376,8 @@ export class BoardComponent implements OnInit {
         item = {
           name: 'Spell',
           mana: null,
+          heal: null,
+          damage: null,
           rarity: item.rarity,
         };
         item = this.generateSpell(item, scalingFactor);
@@ -754,6 +764,28 @@ export class BoardComponent implements OnInit {
         ) + this.dataGenerationServices.player.level;
     }
 
+    // Set stats to one if its below 0
+    if(character.attack <= 0){
+      character.attack = 1
+    }
+    if(character.defense <= 0){
+      character.defense = 1
+    }
+    if(character.health <= 0){
+      character.health = 1
+    }
+    if(character.agility <= 0){
+      character.agility = 1
+    }
+    if(character.critical <= 0){
+      character.critical = 1
+    }
+    if(character.mana <= 0){
+      character.mana = 1
+    }
+    if (character.wisdom <= 0) {
+      character.wisdom = 1
+    }
     return character;
   }
 }

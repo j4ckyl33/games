@@ -13,6 +13,7 @@ export class DataGenerationServices {
   floor = 1
   nextLevel = false
   resetBoard$ = new BehaviorSubject(false)
+  playerFullHealth: number
 
   constructor(private sharedServices: SharedServices) {
     this.player = {

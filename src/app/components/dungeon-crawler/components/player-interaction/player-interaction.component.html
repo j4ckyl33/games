@@ -89,7 +89,7 @@
       ></player-actions>
 
       <!--Bag-->
-      <button (click)="bagToggle = !bagToggle" class="bag-button">
+      <button (click)="bagToggle = !bagToggle" class="bag-button" *ngIf="!currentField?.danger?.enemy">
         <img src="assets/Bag.png" class="bag-image"/>
       </button>
 
