@@ -56,10 +56,10 @@
         <p>You have reached the next Level {{dataGenerationServices.floor}}</p>
         <img src="assets/Door.png" class="floor-image"/>
       </div>
-
     </div>
 
-    <div class="character-details">
+    <!--Character details-->
+    <div class="character-details" *ngIf="!bagToggle">
       <div class="character-details-profile-health">
         Health: {{dataGenerationServices.player.health}}
         <img src="assets/{{dataGenerationServices.player.class}}.png" class="explored-field-image"/>
@@ -77,6 +77,17 @@
         Mana: {{dataGenerationServices.player.mana}}
         <br>
         Wisdom: {{dataGenerationServices.player.wisdom}}
+      </div>
+    </div>
+
+    <!--Equipment Details-->
+    <div class="equipment-details"*ngIf="bagToggle">
+      <div *ngFor="let equipmentPiece of dataGenerationServices.player.equipment | keyvalue">
+        <img src="assets/{{equipmentPiece.key}}.png" class="equipment-image"/>
+        <div *ngFor="let equipment of equipmentPiece.value | keyvalue">
+          {{equipment.key}}:
+          {{equipment.value}}
+        </div>
       </div>
     </div>
 
@@ -103,6 +114,7 @@
       <inventory
         [bagToggle]="bagToggle"
         (bagToggleChange)="bagToggleChange($event)"
+        (spellToggleChange)="spellToggleChange($event)"
       >
       </inventory>
     </div>

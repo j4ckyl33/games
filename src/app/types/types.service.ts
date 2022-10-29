@@ -38,7 +38,6 @@ export type ConsumableItem = {
   name: string;
   heal: number;
   booststats: number;
-  damage: number;
   rarity: Rarity;
 };
 

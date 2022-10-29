@@ -366,7 +366,6 @@ export class BoardComponent implements OnInit {
           name: 'Consumable',
           booststats: null,
           heal: null,
-          damage: null,
           rarity: item.rarity,
         };
         item = this.generateConsumableItem(item, scalingFactor);
@@ -437,17 +436,6 @@ export class BoardComponent implements OnInit {
           this.dataGenerationServices.player.health / 3,
           this.dataGenerationServices.player.health
         );
-        if (this.dataGenerationServices.player.class === 'Mage') {
-          tempConsumableItem.damage = this.sharedServices.getRandomNumber(
-            this.dataGenerationServices.player.wisdom,
-            this.dataGenerationServices.player.wisdom * 1.5
-          );
-        } else {
-          tempConsumableItem.damage = this.sharedServices.getRandomNumber(
-            this.dataGenerationServices.player.attack,
-            this.dataGenerationServices.player.attack * 1.5
-          );
-        }
         break;
       case 2: // Elixier Consumable
         tempConsumableItem.name = 'Elixier Consumable';
@@ -460,20 +448,6 @@ export class BoardComponent implements OnInit {
           this.dataGenerationServices.player.health
         );
         break;
-      case 4: // Damage Consumable
-        tempConsumableItem.name = 'Damage Consumable';
-        if (this.dataGenerationServices.player.class === 'Mage') {
-          tempConsumableItem.damage = this.sharedServices.getRandomNumber(
-            this.dataGenerationServices.player.wisdom,
-            this.dataGenerationServices.player.wisdom * 1.5
-          );
-        } else {
-          tempConsumableItem.damage = this.sharedServices.getRandomNumber(
-            this.dataGenerationServices.player.attack,
-            this.dataGenerationServices.player.attack * 1.5
-          );
-        }
-        break;
     }
     return consumableItem;
   }
@@ -485,7 +459,7 @@ export class BoardComponent implements OnInit {
     if (randomNumber >= 0 && randomNumber < 50) {
       // Common
       item.rarity = 'Common';
-      return 4;
+      return 3;
     } else if (randomNumber >= 50 && randomNumber < 85) {
       // Rare
       item.rarity = 'Rare';

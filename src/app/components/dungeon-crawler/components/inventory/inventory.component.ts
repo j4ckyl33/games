@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Bag, Spell} from 'src/app/types/types.service';
 import { DataGenerationServices } from '../../services/data-generation-service.service';
+import {SharedServices} from "../../shared-services/shared-services.service";
 
 @Component({
   selector: 'inventory',
@@ -14,8 +15,12 @@ export class InventoryComponent implements OnInit {
   itemType: string
   @Input() bagToggle: boolean
   @Output() bagToggleChange = new EventEmitter <boolean>()
+  @Output() spellToggleChange = new EventEmitter <boolean>()
 
-  constructor(private dataGenerationServices: DataGenerationServices) { }
+  constructor(
+    private dataGenerationServices: DataGenerationServices,
+    private sharedServices: SharedServices
+  ) { }
 
   ngOnInit(): void {
     this.bag = this.dataGenerationServices.player.bag
@@ -23,30 +28,16 @@ export class InventoryComponent implements OnInit {
 
   showItemInformation(item: Bag){
     this.currentItem = item
-    this.itemType = this.determineItemtype()
+    this.itemType = this.sharedServices.determineItemtype(this.currentItem)
   }
 
-  determineItemtype(): string {
-    if('defense' in this.currentItem) { // Breastplate
-      return 'Breastplate'
-    }else if('attack' in this.currentItem) { // Weapon
-      return 'Weapon'
-    }else if('agility' in this.currentItem) { // Boots
-      return 'Boots'
-    }else if('wisdom' in this.currentItem) { // Magic Item
-      return 'MagicItem'
-    }else if('booststats' in this.currentItem){ // Consumable Item
-      return 'ConsumableItem'
-    }else{ // Spell
-      return 'Spell'
-    }
-  }
+
 
   backClick(): void {
     this.currentItem = null
   }
 
-  equip(): void {
+  itemEquip(): void {
     if('defense' in this.currentItem) { // Breastplate
       if(this.dataGenerationServices.player.equipment.breastplate !== undefined){
         this.dataGenerationServices.player.bag.push(this.dataGenerationServices.player.equipment.breastplate)
@@ -69,7 +60,21 @@ export class InventoryComponent implements OnInit {
       this.dataGenerationServices.player.equipment.magicItem = this.currentItem
     }
     console.log(this.dataGenerationServices.player.equipment)
+    this.backClick()
   }
+
+  useConsumable(): void {
+    let stats = ['health', 'defense', 'attack', 'agility', 'critical', 'mana', 'wisdom']
+    let chosenStat = stats[this.sharedServices.getRandomNumber(0, 6)]
+    if(!('booststats' in this.currentItem)){return}
+    this.dataGenerationServices.player.health += this.currentItem.heal
+    this.dataGenerationServices.player[chosenStat] += this.currentItem.booststats
+    if(chosenStat === 'health'){
+      this.dataGenerationServices.playerFullHealth += this.currentItem.booststats
+    }
+  }
+
+  spellEquip() {}
 
   showInteractionClick(): void {
     this.bagToggleChange.emit(false)

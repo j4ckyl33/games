@@ -14,12 +14,16 @@
     <div *ngIf="currentItem !== null" class="item-details">
       <div class="button-interactions">
         <button (click)="backClick()" class="back-button"><i class="material-icons">arrow_back</i></button>
-        <button (click)="equip()">Equip</button>
+        <button (click)="itemEquip()" *ngIf="itemType !== 'spell' && itemType !== 'consumableItem'">Equip</button>
+        <button (click)="useConsumable()" *ngIf="itemType === 'consumableItem'">Use</button>
+        <button (click)="spellEquip()" *ngIf="itemType === 'spell'">Equip</button>
       </div>
       <img src="assets/{{itemType}}.png" class="item-image">
+      <!--Show item stats-->
       <div class="item-stats">
           <p *ngFor="let stat of currentItem | keyvalue">{{stat.key}}: {{stat.value}}</p>
       </div>
+
     </div>
   </div>
 </div>

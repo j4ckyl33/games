@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Field } from '../../../types/types.service';
+import {Bag, Field} from '../../../types/types.service';
+import {DataGenerationServices} from "../services/data-generation-service.service";
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +23,21 @@ export class SharedServices {
     min = Math.floor(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * max) + min;
+  }
+
+  determineItemtype(item: Bag): string {
+    if('defense' in item) { // Breastplate
+      return 'breastplate'
+    }else if('attack' in item) { // Weapon
+      return 'weapon'
+    }else if('agility' in item) { // Boots
+      return 'boots'
+    }else if('wisdom' in item) { // Magic Item
+      return 'magicItem'
+    }else if('booststats' in item){ // Consumable Item
+      return 'consumableItem'
+    }else{ // Spell
+      return 'spell'
+    }
   }
 }

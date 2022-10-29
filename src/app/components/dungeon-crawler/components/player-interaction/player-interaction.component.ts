@@ -57,6 +57,10 @@ export class PlayerInteractionComponent {
     return true
   }
 
+  spellToggleChange(event: any): void {
+
+  }
+
   bagToggleChange(event: any): void{
     this.bagToggle = event
   }

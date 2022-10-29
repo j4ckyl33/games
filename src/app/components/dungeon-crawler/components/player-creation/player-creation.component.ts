@@ -20,35 +20,36 @@ export class PlayerCreationComponent {
 
   createPlayer(characterClass: CharacterClass): void {
 
-    let test: Bag[] = [{
-      name: 'test',
+    let test: Bag[] = [{//Breastplate
+      name: 'breastplate',
       health: 1,
       defense: 1,
       rarity: 'Rare'
-    },{
-      name: 'test2',
+    },{ //Magic Item
+      name: 'magic item',
       mana: 1,
       wisdom: 1,
       rarity: 'Rare'
-    },{
-      name: 'test3',
-      health: 1,
-      defense: 1,
+    },{ // Weapon
+      name: 'weapon',
+      attack: 1,
+      critical: 1,
+      rarity: 'Rare'
+    },{ // Boots
+      name: 'boots',
+      agility: 1,
+      critical: 1,
       rarity: 'Rare'
     },{
-      name: 'test4',
-      health: 1,
-      defense: 1,
+      name: 'spell',
+      damage: 1,
+      heal: 1,
+      mana: 1,
       rarity: 'Rare'
     },{
-      name: 'test5',
-      health: 1,
-      defense: 1,
-      rarity: 'Rare'
-    },{
-      name: 'test6',
-      health: 1,
-      defense: 1,
+      name: 'consumable',
+      heal: 1,
+      booststats: 1,
       rarity: 'Rare'
     },{
       name: 'test7',
